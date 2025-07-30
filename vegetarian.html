@@ -84,6 +84,7 @@
                     <a href="index.html#about" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">About</a>
                     <a href="index.html#services" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Services</a>
                     <a href="index.html#contact" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    <a href="cart.html" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Your Cart</a>
                     <button id="authButton" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium" onclick="toggleAuthModal()">Login</button>
                     <button id="logoutButton" class="hidden text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium" onclick="logout()">Logout</button>
                 </div>
@@ -123,7 +124,7 @@
                         <tr class="bg-gray-100">
                             <th class="px-6 py-3 text-left text-sm font-medium text-gray-900">Hindi Name</th>
                             <th class="px-6 py-3 text-left text-sm font-medium text-gray-900">English Name</th>
-                            <th class="px-6 py-3 text-center text-sm font-medium text-gray-900">Quantity</th>
+                            <th class="px-6 py-3 text-center text-sm font-medium text-gray-900">Quantity (in kg)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -134,6 +135,7 @@
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('potato', -1)">-</button>
                                     <input type="number" id="potato-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('potato', 1)">+</button>
                                 </div>
                             </td>
@@ -145,6 +147,7 @@
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('onion', -1)">-</button>
                                     <input type="number" id="onion-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('onion', 1)">+</button>
                                 </div>
                             </td>
@@ -156,6 +159,7 @@
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('tomato', -1)">-</button>
                                     <input type="number" id="tomato-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('tomato', 1)">+</button>
                                 </div>
                             </td>
@@ -167,6 +171,7 @@
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('brinjal', -1)">-</button>
                                     <input type="number" id="brinjal-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('brinjal', 1)">+</button>
                                 </div>
                             </td>
@@ -178,6 +183,7 @@
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('okra', -1)">-</button>
                                     <input type="number" id="okra-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('okra', 1)">+</button>
                                 </div>
                             </td>
@@ -189,6 +195,7 @@
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('bottle-gourd', -1)">-</button>
                                     <input type="number" id="bottle-gourd-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('bottle-gourd', 1)">+</button>
                                 </div>
                             </td>
@@ -200,6 +207,7 @@
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('ridge-gourd', -1)">-</button>
                                     <input type="number" id="ridge-gourd-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('ridge-gourd', 1)">+</button>
                                 </div>
                             </td>
@@ -211,6 +219,7 @@
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('pumpkin', -1)">-</button>
                                     <input type="number" id="pumpkin-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('pumpkin', 1)">+</button>
                                 </div>
                             </td>
@@ -222,6 +231,7 @@
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('carrot', -1)">-</button>
                                     <input type="number" id="carrot-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('carrot', 1)">+</button>
                                 </div>
                             </td>
@@ -233,6 +243,7 @@
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('radish', -1)">-</button>
                                     <input type="number" id="radish-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('radish', 1)">+</button>
                                 </div>
                             </td>
@@ -244,6 +255,7 @@
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('cauliflower', -1)">-</button>
                                     <input type="number" id="cauliflower-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('cauliflower', 1)">+</button>
                                 </div>
                             </td>
@@ -252,9 +264,12 @@
                             <td class="px-6 py-4 border-b">पत्ता गोभी</td>
                             <td class="px-6 py-4 border-b">Cabbage</td>
                             <td class="px-6 py-4 border-b text-center">
-                                <button class="quantity-btn" onclick="updateQuantity('cabbage', -1)">-</button>
-                                <input type="number" id="cabbage-quantity" class="quantity-input" value="0" min="0" readonly>
-                                <button class="quantity-btn" onclick="updateQuantity('cabbage', 1)">+</button>
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('cabbage', -1)">-</button>
+                                    <input type="number" id="cabbage-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
+                                    <button class="quantity-btn" onclick="updateQuantity('cabbage', 1)">+</button>
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -264,6 +279,7 @@
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('spinach', -1)">-</button>
                                     <input type="number" id="spinach-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('spinach', 1)">+</button>
                                 </div>
                             </td>
@@ -275,6 +291,7 @@
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('fenugreek', -1)">-</button>
                                     <input type="number" id="fenugreek-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('fenugreek', 1)">+</button>
                                 </div>
                             </td>
@@ -286,19 +303,19 @@
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('mustard-leaves', -1)">-</button>
                                     <input type="number" id="mustard-leaves-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('mustard-leaves', 1)">+</button>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="px- tästä
-
-System: 6 py-4 border-b">हरा मटर</td>
+                            <td class="px-6 py-4 border-b">हरा मटर</td>
                             <td class="px-6 py-4 border-b">Green Peas</td>
                             <td class="px-6 py-4 border-b text-center">
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('green-peas', -1)">-</button>
                                     <input type="number" id="green-peas-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('green-peas', 1)">+</button>
                                 </div>
                             </td>
@@ -310,6 +327,7 @@ System: 6 py-4 border-b">हरा मटर</td>
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('capsicum', -1)">-</button>
                                     <input type="number" id="capsicum-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('capsicum', 1)">+</button>
                                 </div>
                             </td>
@@ -321,6 +339,7 @@ System: 6 py-4 border-b">हरा मटर</td>
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('green-chili', -1)">-</button>
                                     <input type="number" id="green-chili-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('green-chili', 1)">+</button>
                                 </div>
                             </td>
@@ -332,6 +351,7 @@ System: 6 py-4 border-b">हरा मटर</td>
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('ginger', -1)">-</button>
                                     <input type="number" id="ginger-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('ginger', 1)">+</button>
                                 </div>
                             </td>
@@ -343,6 +363,7 @@ System: 6 py-4 border-b">हरा मटर</td>
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('garlic', -1)">-</button>
                                     <input type="number" id="garlic-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('garlic', 1)">+</button>
                                 </div>
                             </td>
@@ -354,6 +375,7 @@ System: 6 py-4 border-b">हरा मटर</td>
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('lemon', -1)">-</button>
                                     <input type="number" id="lemon-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('lemon', 1)">+</button>
                                 </div>
                             </td>
@@ -365,6 +387,7 @@ System: 6 py-4 border-b">हरा मटर</td>
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('coriander', -1)">-</button>
                                     <input type="number" id="coriander-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('coriander', 1)">+</button>
                                 </div>
                             </td>
@@ -376,6 +399,7 @@ System: 6 py-4 border-b">हरा मटर</td>
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('curry-leaves', -1)">-</button>
                                     <input type="number" id="curry-leaves-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('curry-leaves', 1)">+</button>
                                 </div>
                             </td>
@@ -387,6 +411,7 @@ System: 6 py-4 border-b">हरा मटर</td>
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('colocasia', -1)">-</button>
                                     <input type="number" id="colocasia-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('colocasia', 1)">+</button>
                                 </div>
                             </td>
@@ -398,6 +423,7 @@ System: 6 py-4 border-b">हरा मटर</td>
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('beans', -1)">-</button>
                                     <input type="number" id="beans-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('beans', 1)">+</button>
                                 </div>
                             </td>
@@ -409,6 +435,7 @@ System: 6 py-4 border-b">हरा मटर</td>
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('apple-gourd', -1)">-</button>
                                     <input type="number" id="apple-gourd-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('apple-gourd', 1)">+</button>
                                 </div>
                             </td>
@@ -420,6 +447,7 @@ System: 6 py-4 border-b">हरा मटर</td>
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('cucumber', -1)">-</button>
                                     <input type="number" id="cucumber-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('cucumber', 1)">+</button>
                                 </div>
                             </td>
@@ -431,6 +459,7 @@ System: 6 py-4 border-b">हरा मटर</td>
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('drumstick', -1)">-</button>
                                     <input type="number" id="drumstick-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('drumstick', 1)">+</button>
                                 </div>
                             </td>
@@ -442,6 +471,7 @@ System: 6 py-4 border-b">हरा मटर</td>
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('beetroot', -1)">-</button>
                                     <input type="number" id="beetroot-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('beetroot', 1)">+</button>
                                 </div>
                             </td>
@@ -453,6 +483,7 @@ System: 6 py-4 border-b">हरा मटर</td>
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('jackfruit', -1)">-</button>
                                     <input type="number" id="jackfruit-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('jackfruit', 1)">+</button>
                                 </div>
                             </td>
@@ -464,6 +495,7 @@ System: 6 py-4 border-b">हरा मटर</td>
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('broad-beans', -1)">-</button>
                                     <input type="number" id="broad-beans-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('broad-beans', 1)">+</button>
                                 </div>
                             </td>
@@ -475,6 +507,7 @@ System: 6 py-4 border-b">हरा मटर</td>
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('corn', -1)">-</button>
                                     <input type="number" id="corn-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('corn', 1)">+</button>
                                 </div>
                             </td>
@@ -486,6 +519,7 @@ System: 6 py-4 border-b">हरा मटर</td>
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('yam', -1)">-</button>
                                     <input type="number" id="yam-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('yam', 1)">+</button>
                                 </div>
                             </td>
@@ -497,6 +531,7 @@ System: 6 py-4 border-b">हरा मटर</td>
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('snap-melon', -1)">-</button>
                                     <input type="number" id="snap-melon-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('snap-melon', 1)">+</button>
                                 </div>
                             </td>
@@ -508,6 +543,7 @@ System: 6 py-4 border-b">हरा मटर</td>
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('turmeric', -1)">-</button>
                                     <input type="number" id="turmeric-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
                                     <button class="quantity-btn" onclick="updateQuantity('turmeric', 1)">+</button>
                                 </div>
                             </td>
@@ -516,7 +552,7 @@ System: 6 py-4 border-b">हरा मटर</td>
                 </table>
             </div>
             <div class="text-center mt-8">
-                <button class="bg-orange-500 text-white py-2 px-6 rounded-md hover:bg-orange-600" onclick="submitOrder()">Place Order</button>
+                <button class="bg-orange-500 text-white py-2 px-6 rounded-md hover:bg-orange-600" onclick="addToCart()">Add to Cart</button>
             </div>
         </div>
     </section>
@@ -651,23 +687,66 @@ System: 6 py-4 border-b">हरा मटर</td>
             input.value = value;
         };
 
-        // Order submission function
-        window.submitOrder = function() {
+        // Add to cart function
+        window.addToCart = function() {
             const order = {};
             const inputs = document.querySelectorAll('.quantity-input');
+            const items = [
+                { id: 'potato', hindi: 'आलू', english: 'Potato' },
+                { id: 'onion', hindi: 'प्याज़', english: 'Onion' },
+                { id: 'tomato', hindi: 'टमाटर', english: 'Tomato' },
+                { id: 'brinjal', hindi: 'बैंगन', english: 'Brinjal / Eggplant' },
+                { id: 'okra', hindi: 'भिंडी', english: 'Lady Finger / Okra' },
+                { id: 'bottle-gourd', hindi: 'लौकी', english: 'Bottle Gourd' },
+                { id: 'ridge-gourd', hindi: 'तोरई', english: 'Ridge Gourd / Sponge Gourd' },
+                { id: 'pumpkin', hindi: 'कद्दू', english: 'Pumpkin' },
+                { id: 'carrot', hindi: 'गाजर', english: 'Carrot' },
+                { id: 'radish', hindi: 'मूली', english: 'Radish' },
+                { id: 'cauliflower', hindi: 'गोभी', english: 'Cauliflower' },
+                { id: 'cabbage', hindi: 'पत्ता गोभी', english: 'Cabbage' },
+                { id: 'spinach', hindi: 'पालक', english: 'Spinach' },
+                { id: 'fenugreek', hindi: 'मेथी', english: 'Fenugreek Leaves' },
+                { id: 'mustard-leaves', hindi: 'सरसों का साग', english: 'Mustard Leaves' },
+                { id: 'green-peas', hindi: 'हरा मटर', english: 'Green Peas' },
+                { id: 'capsicum', hindi: 'शिमला मिर्च', english: 'Capsicum / Bell Pepper' },
+                { id: 'green-chili', hindi: 'हरी मिर्च', english: 'Green Chili' },
+                { id: 'ginger', hindi: 'अदरक', english: 'Ginger' },
+                { id: 'garlic', hindi: 'लहसुन', english: 'Garlic' },
+                { id: 'lemon', hindi: 'नींबू', english: 'Lemon' },
+                { id: 'coriander', hindi: 'धनिया पत्ता', english: 'Coriander Leaves' },
+                { id: 'curry-leaves', hindi: 'करी पत्ता', english: 'Curry Leaves' },
+                { id: 'colocasia', hindi: 'कड़ीमूल (अरबी)', english: 'Colocasia / Taro Root' },
+                { id: 'beans', hindi: 'बीन्स', english: 'Beans' },
+                { id: 'apple-gourd', hindi: 'टिंडा', english: 'Apple Gourd / Indian Round Gourd' },
+                { id: 'cucumber', hindi: 'खीरा', english: 'Cucumber' },
+                { id: 'drumstick', hindi: 'सहजन (सहजन की फली)', english: 'Drumstick' },
+                { id: 'beetroot', hindi: 'चुकंदर', english: 'Beetroot' },
+                { id: 'jackfruit', hindi: 'कटहल', english: 'Jackfruit' },
+                { id: 'broad-beans', hindi: 'सेम', english: 'Broad Beans' },
+                { id: 'corn', hindi: 'मक्का', english: 'Corn / Maize' },
+                { id: 'yam', hindi: 'कचालू', english: 'Yam' },
+                { id: 'snap-melon', hindi: 'कचरी', english: 'Snap Melon / Wild Melon' },
+                { id: 'turmeric', hindi: 'हल्दी की गांठ', english: 'Turmeric Root' }
+            ];
+
             inputs.forEach(input => {
-                const item = input.id.replace('-quantity', '');
+                const itemId = input.id.replace('-quantity', '');
                 const quantity = parseInt(input.value);
                 if (quantity > 0) {
-                    order[item] = quantity;
+                    const item = items.find(i => i.id === itemId);
+                    if (item) {
+                        order[itemId] = { hindi: item.hindi, english: item.english, quantity };
+                    }
                 }
             });
+
             if (Object.keys(order).length > 0) {
-                alert('Order placed successfully! Details:\n' + JSON.stringify(order, null, 2));
-                // Reset quantities after order
+                localStorage.setItem('cart', JSON.stringify(order));
+                alert('Items added to cart successfully!');
                 inputs.forEach(input => input.value = '0');
+                window.location.href = 'cart.html';
             } else {
-                alert('Please select at least one item to place an order.');
+                alert('Please select at least one item to add to cart.');
             }
         };
     </script>
