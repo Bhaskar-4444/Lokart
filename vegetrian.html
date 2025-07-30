@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suprova - Vegetarian Items</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
+    <style>
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 2rem;
+            color: #f97316;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+        }
+        .quantity-btn {
+            background: linear-gradient(to right, #f97316, #16a34a);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .quantity-btn:hover {
+            background: linear-gradient(to right, #ea580c, #15803d);
+        }
+        .quantity-input {
+            width: 3rem;
+            text-align: center;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            margin: 0 0.5rem;
+        }
+        #authModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 20;
+        }
+        #authModal.show {
+            display: flex;
+        }
+        #authForm {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+        }
+        #closeModal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="logo">Suprova</div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="index.html#home" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">About</a>
+                    <a href="index.html#services" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Services</a>
+                    <a href="index.html#contact" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    <button id="authButton" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium" onclick="toggleAuthModal()">Login</button>
+                    <button id="logoutButton" class="hidden text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Authentication Modal -->
+    <div id="authModal">
+        <div id="authForm" class="shadow-lg">
+            <span id="closeModal" onclick="toggleAuthModal()">&times;</span>
+            <h2 id="authTitle" class="text-2xl font-bold text-center mb-4">Login</h2>
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700">Email</label>
+                <input type="email" id="email" class="w-full px-3 py-2 border rounded-md">
+            </div>
+            <div class="mb-4">
+                <label for="password" class="block text-gray-700">Password</label>
+                <input type="password" id="password" class="w-full px-3 py-2 border rounded-md">
+            </div>
+            <button id="authSubmit" class="w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600" onclick="handleAuth()">Login</button>
+            <button class="w-full mt-2 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600" onclick="signInWithGoogle()">Sign in with Google</button>
+            <p class="mt-4 text-center text-gray-600">
+                <a href="#" id="toggleAuthMode" class="text-orange-500 hover:underline" onclick="toggleAuthMode()">Create an account</a>
+            </p>
+            <p id="authError" class="text-red-500 text-center mt-2 hidden"></p>
+        </div>
+    </div>
+
+    <!-- Vegetarian Items Section -->
+    <section id="vegetarian" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">Vegetarian Items</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border rounded-lg">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-900">Hindi Name</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-900">English Name</th>
+                            <th class="px-6 py-3 text-center text-sm font-medium text-gray-900">Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-6 py-4 border-b">आलू</td>
+                            <td class="px-6 py-4 border-b">Potato</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('potato', -1)">-</button>
+                                    <input type="number" id="potato-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('potato', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">प्याज़</td>
+                            <td class="px-6 py-4 border-b">Onion</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('onion', -1)">-</button>
+                                    <input type="number" id="onion-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('onion', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">टमाटर</td>
+                            <td class="px-6 py-4 border-b">Tomato</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('tomato', -1)">-</button>
+                                    <input type="number" id="tomato-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('tomato', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">बैंगन</td>
+                            <td class="px-6 py-4 border-b">Brinjal / Eggplant</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('brinjal', -1)">-</button>
+                                    <input type="number" id="brinjal-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('brinjal', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">भिंडी</td>
+                            <td class="px-6 py-4 border-b">Lady Finger / Okra</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('okra', -1)">-</button>
+                                    <input type="number" id="okra-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('okra', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">लौकी</td>
+                            <td class="px-6 py-4 border-b">Bottle Gourd</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('bottle-gourd', -1)">-</button>
+                                    <input type="number" id="bottle-gourd-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('bottle-gourd', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">तोरई</td>
+                            <td class="px-6 py-4 border-b">Ridge Gourd / Sponge Gourd</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('ridge-gourd', -1)">-</button>
+                                    <input type="number" id="ridge-gourd-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('ridge-gourd', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">कद्दू</td>
+                            <td class="px-6 py-4 border-b">Pumpkin</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('pumpkin', -1)">-</button>
+                                    <input type="number" id="pumpkin-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('pumpkin', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">गाजर</td>
+                            <td class="px-6 py-4 border-b">Carrot</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('carrot', -1)">-</button>
+                                    <input type="number" id="carrot-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('carrot', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">मूली</td>
+                            <td class="px-6 py-4 border-b">Radish</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('radish', -1)">-</button>
+                                    <input type="number" id="radish-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('radish', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">गोभी</td>
+                            <td class="px-6 py-4 border-b">Cauliflower</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('cauliflower', -1)">-</button>
+                                    <input type="number" id="cauliflower-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('cauliflower', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">पत्ता गोभी</td>
+                            <td class="px-6 py-4 border-b">Cabbage</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <button class="quantity-btn" onclick="updateQuantity('cabbage', -1)">-</button>
+                                <input type="number" id="cabbage-quantity" class="quantity-input" value="0" min="0" readonly>
+                                <button class="quantity-btn" onclick="updateQuantity('cabbage', 1)">+</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">पालक</td>
+                            <td class="px-6 py-4 border-b">Spinach</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('spinach', -1)">-</button>
+                                    <input type="number" id="spinach-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('spinach', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">मेथी</td>
+                            <td class="px-6 py-4 border-b">Fenugreek Leaves</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('fenugreek', -1)">-</button>
+                                    <input type="number" id="fenugreek-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('fenugreek', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">सरसों का साग</td>
+                            <td class="px-6 py-4 border-b">Mustard Leaves</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('mustard-leaves', -1)">-</button>
+                                    <input type="number" id="mustard-leaves-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('mustard-leaves', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px- tästä
+
+System: 6 py-4 border-b">हरा मटर</td>
+                            <td class="px-6 py-4 border-b">Green Peas</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('green-peas', -1)">-</button>
+                                    <input type="number" id="green-peas-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('green-peas', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">शिमला मिर्च</td>
+                            <td class="px-6 py-4 border-b">Capsicum / Bell Pepper</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('capsicum', -1)">-</button>
+                                    <input type="number" id="capsicum-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('capsicum', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">हरी मिर्च</td>
+                            <td class="px-6 py-4 border-b">Green Chili</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('green-chili', -1)">-</button>
+                                    <input type="number" id="green-chili-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('green-chili', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">अदरक</td>
+                            <td class="px-6 py-4 border-b">Ginger</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('ginger', -1)">-</button>
+                                    <input type="number" id="ginger-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('ginger', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">लहसुन</td>
+                            <td class="px-6 py-4 border-b">Garlic</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('garlic', -1)">-</button>
+                                    <input type="number" id="garlic-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('garlic', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">नींबू</td>
+                            <td class="px-6 py-4 border-b">Lemon</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('lemon', -1)">-</button>
+                                    <input type="number" id="lemon-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('lemon', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">धनिया पत्ता</td>
+                            <td class="px-6 py-4 border-b">Coriander Leaves</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('coriander', -1)">-</button>
+                                    <input type="number" id="coriander-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('coriander', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">करी पत्ता</td>
+                            <td class="px-6 py-4 border-b">Curry Leaves</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('curry-leaves', -1)">-</button>
+                                    <input type="number" id="curry-leaves-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('curry-leaves', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">कड़ीमूल (अरबी)</td>
+                            <td class="px-6 py-4 border-b">Colocasia / Taro Root</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('colocasia', -1)">-</button>
+                                    <input type="number" id="colocasia-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('colocasia', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">बीन्स</td>
+                            <td class="px-6 py-4 border-b">Beans</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('beans', -1)">-</button>
+                                    <input type="number" id="beans-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('beans', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">टिंडा</td>
+                            <td class="px-6 py-4 border-b">Apple Gourd / Indian Round Gourd</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('apple-gourd', -1)">-</button>
+                                    <input type="number" id="apple-gourd-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('apple-gourd', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">खीरा</td>
+                            <td class="px-6 py-4 border-b">Cucumber</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('cucumber', -1)">-</button>
+                                    <input type="number" id="cucumber-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('cucumber', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">सहजन (सहजन की फली)</td>
+                            <td class="px-6 py-4 border-b">Drumstick</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('drumstick', -1)">-</button>
+                                    <input type="number" id="drumstick-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('drumstick', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">चुकंदर</td>
+                            <td class="px-6 py-4 border-b">Beetroot</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('beetroot', -1)">-</button>
+                                    <input type="number" id="beetroot-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('beetroot', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">कटहल</td>
+                            <td class="px-6 py-4 border-b">Jackfruit</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('jackfruit', -1)">-</button>
+                                    <input type="number" id="jackfruit-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('jackfruit', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">सेम</td>
+                            <td class="px-6 py-4 border-b">Broad Beans</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('broad-beans', -1)">-</button>
+                                    <input type="number" id="broad-beans-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('broad-beans', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">मक्का</td>
+                            <td class="px-6 py-4 border-b">Corn / Maize</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('corn', -1)">-</button>
+                                    <input type="number" id="corn-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('corn', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">कचालू</td>
+                            <td class="px-6 py-4 border-b">Yam</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('yam', -1)">-</button>
+                                    <input type="number" id="yam-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('yam', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">कचरी</td>
+                            <td class="px-6 py-4 border-b">Snap Melon / Wild Melon</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('snap-melon', -1)">-</button>
+                                    <input type="number" id="snap-melon-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('snap-melon', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">हल्दी की गांठ</td>
+                            <td class="px-6 py-4 border-b">Turmeric Root</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('turmeric', -1)">-</button>
+                                    <input type="number" id="turmeric-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('turmeric', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center mt-8">
+                <button class="bg-orange-500 text-white py-2 px-6 rounded-md hover:bg-orange-600" onclick="submitOrder()">Place Order</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col items-center">
+                <div class="logo mb-4">Suprova</div>
+                <p class="text-gray-400 text-center">© 2025 Suprova. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAAlsMvIBJf5N39wjckLszxvC5m_bpnINc",
+            authDomain: "lokart-2dc3c.firebaseapp.com",
+            databaseURL: "https://lokart-2dc3c-default-rtdb.firebaseio.com",
+            projectId: "lokart-2dc3c",
+            storageBucket: "lokart-2dc3c.firebasestorage.app",
+            messagingSenderId: "174715257453",
+            appId: "1:174715257453:web:be4b91210aa1771f587564",
+            measurementId: "G-NGHHKZHCV5"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        onAuthStateChanged(auth, (user) => {
+            const authButton = document.getElementById('authButton');
+            const logoutButton = document.getElementById('logoutButton');
+            if (user) {
+                authButton.classList.add('hidden');
+                logoutButton.classList.remove('hidden');
+            } else {
+                authButton.classList.remove('hidden');
+                logoutButton.classList.add('hidden');
+            }
+        });
+
+        window.toggleAuthModal = function() {
+            const modal = document.getElementById('authModal');
+            modal.classList.toggle('show');
+            if (!modal.classList.contains('show')) {
+                resetForm();
+            }
+        };
+
+        let isLoginMode = true;
+        window.toggleAuthMode = function() {
+            isLoginMode = !isLoginMode;
+            const authTitle = document.getElementById('authTitle');
+            const authSubmit = document.getElementById('authSubmit');
+            const toggleAuthMode = document.getElementById('toggleAuthMode');
+            authTitle.textContent = isLoginMode ? 'Login' : 'Sign Up';
+            authSubmit.textContent = isLoginMode ? 'Login' : 'Sign Up';
+            toggleAuthMode.textContent = isLoginMode ? 'Create an account' : 'Already have an account? Login';
+            resetForm();
+        };
+
+        function resetForm() {
+            document.getElementById('email').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('authError').classList.add('hidden');
+            document.getElementById('authError').textContent = '';
+        }
+
+        window.handleAuth = async function() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const authError = document.getElementById('authError');
+
+            try {
+                if (isLoginMode) {
+                    await signInWithEmailAndPassword(auth, email, password);
+                } else {
+                    await createUserWithEmailAndPassword(auth, email, password);
+                }
+                toggleAuthModal();
+            } catch (error) {
+                authError.classList.remove('hidden');
+                authError.textContent = error.message;
+            }
+        };
+
+        window.signInWithGoogle = async function() {
+            try {
+                await signInWithPopup(auth, provider);
+                toggleAuthModal();
+            } catch (error) {
+                const authError = document.getElementById('authError');
+                authError.classList.remove('hidden');
+                authError.textContent = error.message;
+            }
+        };
+
+        window.logout = async function() {
+            try {
+                await signOut(auth);
+            } catch (error) {
+                console.error('Logout error:', error);
+            }
+        };
+    </script>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            const href = anchor.getAttribute('href');
+            if (href && href !== '#' && document.querySelector(href)) {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        });
+
+        // Quantity update function
+        window.updateQuantity = function(item, change) {
+            const input = document.getElementById(`${item}-quantity`);
+            let value = parseInt(input.value);
+            value = Math.max(0, value + change);
+            input.value = value;
+        };
+
+        // Order submission function
+        window.submitOrder = function() {
+            const order = {};
+            const inputs = document.querySelectorAll('.quantity-input');
+            inputs.forEach(input => {
+                const item = input.id.replace('-quantity', '');
+                const quantity = parseInt(input.value);
+                if (quantity > 0) {
+                    order[item] = quantity;
+                }
+            });
+            if (Object.keys(order).length > 0) {
+                alert('Order placed successfully! Details:\n' + JSON.stringify(order, null, 2));
+                // Reset quantities after order
+                inputs.forEach(input => input.value = '0');
+            } else {
+                alert('Please select at least one item to place an order.');
+            }
+        };
+    </script>
+</body>
+</html>
