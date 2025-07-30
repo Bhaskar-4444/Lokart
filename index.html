@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suprova - Supply, Pro, Value</title>
+    <title>Suprova - Your Online Grocery Store</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
     <style>
@@ -13,93 +13,6 @@
             font-size: 2rem;
             color: #f97316;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-        }
-        .slideshow-container {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-        }
-        .slide {
-            display: none;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-        .slide.active {
-            display: block;
-            opacity: 1;
-        }
-        .slideshow-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .slideshow-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: linear-gradient(to right, #f97316, #16a34a);
-            color: white;
-            padding: 1rem;
-            cursor: pointer;
-            font-size: 1.5rem;
-            border-radius: 50%;
-            transition: background 0.3s;
-        }
-        .slideshow-btn:hover {
-            background: linear-gradient(to right, #ea580c, #15803d);
-        }
-        .prev {
-            left: 20px;
-        }
-        .next {
-            right: 20px;
-        }
-        .dots-container {
-            position: absolute;
-            bottom: 4px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 8px;
-        }
-        .dot {
-            width: 12px;
-            height: 12px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .dot.active {
-            background: #f97316;
-        }
-        .caption {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 4px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .slide:hover .caption {
-            opacity: 1;
         }
         h1, h2, h3 {
             font-family: 'Poppins', sans-serif;
@@ -149,6 +62,7 @@
                     <a href="#about" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">About</a>
                     <a href="#services" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Services</a>
                     <a href="#contact" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    <a href="cart.html" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Your Cart</a>
                     <button id="authButton" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium" onclick="toggleAuthModal()">Login</button>
                     <button id="logoutButton" class="hidden text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium" onclick="logout()">Logout</button>
                 </div>
@@ -178,82 +92,59 @@
         </div>
     </div>
 
-    <!-- Hero Section with Slideshow -->
-    <section id="home" class="slideshow-container">
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/244393/pexels-photo-244393.jpeg" alt="Freshly Sourced Red Onions" loading="lazy">
-            <span class="caption">Fresh Red Onions</span>
+    <!-- Hero Section -->
+    <section id="home" class="bg-gradient-to-r from-orange-400 to-green-500 text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Welcome to Suprova</h1>
+            <p class="text-lg md:text-xl mb-6">Your one-stop solution for fresh groceries and premium products delivered to your doorstep.</p>
+            <a href="#services" class="bg-white text-orange-500 py-2 px-6 rounded-md hover:bg-gray-100 font-medium">Shop Now</a>
         </div>
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/143133/pexels-photo-143133.jpeg" alt="Freshly Sourced Carrots" loading="lazy">
-            <span class="caption">Fresh Carrots</span>
-        </div>
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/2329440/pexels-photo-2329440.jpeg" alt="Freshly Sourced Cucumbers" loading="lazy">
-            <span class="caption">Fresh Cucumbers</span>
-        </div>
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/53494/pexels-photo-53494.jpeg" alt="Freshly Sourced Mushrooms" loading="lazy">
-            <span class="caption">Fresh Mushrooms</span>
-        </div>
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/603030/pexels-photo-603030.jpeg" alt="Freshly Sourced Sweet Corn" loading="lazy">
-            <span class="caption">Fresh Sweet Corn</span>
-        </div>
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/2893635/pexels-photo-2893635.jpeg" alt="Freshly Sourced Green Bell Peppers" loading="lazy">
-            <span class="caption">Fresh Green Bell Peppers</span>
-        </div>
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/4947354/pexels-photo-4947354.jpeg" alt="Freshly Sourced Cabbage" loading="lazy">
-            <span class="caption">Fresh Cabbage</span>
-        </div>
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/8455375/pexels-photo-8455375.jpeg" alt="Freshly Sourced Assorted Vegetables" loading="lazy">
-            <span class="caption">Fresh Assorted Vegetables</span>
-        </div>
-        <div class="slideshow-overlay">
-            <div class="max-w-3xl mx-auto px-4 text-center text-white">
-                <h1 class="text-4xl sm:text-5xl font-bold mb-4">Welcome to Suprova</h1>
-                <p class="text-lg sm:text-xl mb-6">Delivering Supply, Professionalism, and Value to elevate your dining experience.</p>
-            </div>
-        </div>
-        <div class="slideshow-btn prev" onclick="changeSlide(-1)" aria-label="Previous Slide">&#10094;</div>
-        <div class="slideshow-btn next" onclick="changeSlide(1)" aria-label="Next Slide">&#10095;</div>
-        <div class="dots-container"></div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">About Suprova</h2>
-            <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto">
-                Suprova combines supply chain expertise, professional service, and unmatched value to bring you a unique dining experience. 
-                We are passionate about quality, sustainability, and customer satisfaction.
-            </p>
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">About Us</h2>
+            <p class="text-gray-600 text-center">Suprova is dedicated to providing high-quality groceries, sourced directly from trusted farms and suppliers. Our mission is to make your shopping experience seamless and delightful.</p>
         </div>
     </section>
 
     <!-- Services Section -->
     <section id="services" class="py-16 bg-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">Our Services</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">Our Products</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <a href="vegetarian.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Vegetarian Items</h3>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Vegetarian Items 🌿</h3>
                     <p class="text-gray-600">Explore our range of fresh, plant-based dishes crafted with organic ingredients.</p>
                 </a>
                 <a href="non_vegetarian.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Non-Vegetarian Items</h3>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Non-Vegetarian Items 🍗</h3>
                     <p class="text-gray-600">Premium quality meat and seafood sourced sustainably for your dining pleasure.</p>
                 </a>
-                <a href="dry_items.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Dry Items</h3>
-                    <p class="text-gray-600">High-quality dry goods like spices, grains, and snacks for your pantry.</p>
+                <a href="dairy_products.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Dairy Products 🧀</h3>
+                    <p class="text-gray-600">Fresh and high-quality dairy products for your daily needs.</p>
+                </a>
+                <a href="spices_masalas.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Spices & Masalas 🧂</h3>
+                    <p class="text-gray-600">Authentic spices and masalas to elevate your culinary creations.</p>
+                </a>
+                <a href="oils_fats.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Oils & Fats 🍪</h3>
+                    <p class="text-gray-600">Pure and healthy oils and fats for cooking and baking.</p>
+                </a>
+                <a href="snacks_dry_items.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Snacks & Dry Items 🍬</h3>
+                    <p class="text-gray-600">Premium quality snacks, grains, and pulses for your pantry.</p>
+                </a>
+                <a href="sweeteners_baking.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Sweeteners & Baking 🍰</h3>
+                    <p class="text-gray-600">High-quality sweeteners and baking essentials for delicious treats.</p>
                 </a>
                 <a href="other_items.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Other Items</h3>
-                    <p class="text-gray-600">Discover beverages, supplements, and specialty products to enhance your meals.</p>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Other Items 🛒</h3>
+                    <p class="text-gray-600">A variety of condiments and essentials to complete your grocery list.</p>
                 </a>
             </div>
         </div>
@@ -262,17 +153,8 @@
     <!-- Contact Section -->
     <section id="contact" class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">Get in Touch</h2>
-            <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-8">
-                Have questions or want to collaborate? Reach out to us today!
-            </p>
-            <div class="max-w-lg mx-auto">
-                <div class="text-center">
-                    <p class="text-gray-600 mb-2">Email: contact@suprova.com</p>
-                    <p class="text-gray-600 mb-2">Phone: +91 123-456-7890</p>
-                    <p class="text-gray-600">Address: 123 Food Street, Mumbai, India</p>
-                </div>
-            </div>
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">Contact Us</h2>
+            <p class="text-gray-600 text-center">Have questions? Reach out to us at <a href="mailto:support@suprova.com" class="text-orange-500 hover:underline">support@suprova.com</a> or call us at +91-123-456-7890.</p>
         </div>
     </section>
 
@@ -285,39 +167,6 @@
             </div>
         </div>
     </footer>
-
-    <script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-            if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-                try {
-                    var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                    var firstSheetName = workbook.SheetNames[0];
-                    var worksheet = workbook.Sheets[firstSheetName];
-                    var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                    var filteredData = jsonData.filter(row => row.some(filledCell));
-                    var headerRowIndex = filteredData.findIndex((row, index) =>
-                      row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                    );
-                    if (headerRowIndex === -1 || headerRowIndex > 25) {
-                      headerRowIndex = 0;
-                    }
-                    var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex));
-                    csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                    return csv;
-                } catch (e) {
-                    console.error(e);
-                    return "";
-                }
-            }
-            return gk_fileData[filename] || "";
-        }
-    </script>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
@@ -415,54 +264,16 @@
                 console.error('Logout error:', error);
             }
         };
-    </script>
 
-    <script>
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            const href = anchor.getAttribute('href');
-            if (href && href !== '#' && document.querySelector(href)) {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(href).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
                 });
-            }
+            });
         });
-
-        // Slideshow functionality
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const dotsContainer = document.querySelector('.dots-container');
-
-        slides.forEach((_, i) => {
-            const dot = document.createElement('span');
-            dot.classList.add('dot');
-            if (i === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(i));
-            dotsContainer.appendChild(dot);
-        });
-
-        slides[currentSlide].classList.add('active');
-
-        function changeSlide(direction) {
-            slides[currentSlide].classList.remove('active');
-            document.querySelectorAll('.dot')[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + direction + slides.length) % slides.length;
-            slides[currentSlide].classList.add('active');
-            document.querySelectorAll('.dot')[currentSlide].classList.add('active');
-        }
-
-        function goToSlide(index) {
-            slides[currentSlide].classList.remove('active');
-            document.querySelectorAll('.dot')[currentSlide].classList.remove('active');
-            currentSlide = index;
-            slides[currentSlide].classList.add('active');
-            document.querySelectorAll('.dot')[currentSlide].classList.add('active');
-        }
-
-        setInterval(() => changeSlide(1), 2000);
     </script>
 </body>
 </html>
