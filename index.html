@@ -335,5 +335,50 @@
         // Auto-slide every 2 seconds
         setInterval(() => changeSlide(1), 2000);
     </script>
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyAAlsMvIBJf5N39wjckLszxvC5m_bpnINc",
+    authDomain: "lokart-2dc3c.firebaseapp.com",
+    databaseURL: "https://lokart-2dc3c-default-rtdb.firebaseio.com",
+    projectId: "lokart-2dc3c",
+    storageBucket: "lokart-2dc3c.firebasestorage.app",
+    messagingSenderId: "174715257453",
+    appId: "1:174715257453:web:be4b91210aa1771f587564",
+    measurementId: "G-NGHHKZHCV5"
+  };
+
+  // Initialize Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  function login() {
+    const email = document.getElementById("email").value;
+    const pass = document.getElementById("password").value;
+    auth.signInWithEmailAndPassword(email, pass)
+      .then(user => {
+        alert("✅ Logged in successfully!");
+      })
+      .catch(error => {
+        alert("❌ " + error.message);
+      });
+  }
+
+  function signup() {
+    const email = document.getElementById("email").value;
+    const pass = document.getElementById("password").value;
+    auth.createUserWithEmailAndPassword(email, pass)
+      .then(user => {
+        alert("✅ Signed up successfully!");
+      })
+      .catch(error => {
+        alert("❌ " + error.message);
+      });
+  }
+</script>
+
 </body>
 </html>
