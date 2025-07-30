@@ -104,6 +104,54 @@
         h1, h2, h3 {
             font-family: 'Poppins', sans-serif;
         }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .modal-content input {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .modal-content button {
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(to right, #f97316, #16a34a);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .modal-content button:hover {
+            background: linear-gradient(to right, #ea580c, #15803d);
+        }
+        .protected-section {
+            filter: blur(4px);
+            pointer-events: none;
+        }
+        .protected-section.unlocked {
+            filter: none;
+            pointer-events: auto;
+        }
     </style>
 </head>
 <body class="bg-gray-100 font-sans">
@@ -119,10 +167,131 @@
                     <a href="#about" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">About</a>
                     <a href="#services" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Services</a>
                     <a href="#contact" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    <button id="auth-btn" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium" onclick="toggleAuth()">Login</button>
                 </div>
             </div>
         </div>
     </nav>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <h2 class="text-2xl font-bold mb-4">Login</h2>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button onclick="handleLogin()">Login</button>
+            <p class="text-gray-600 text-sm mt-2">Don't have an account? <a href="#" onclick="showSignUp()">Sign Up</a></p>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div id="signup-modal" class="modal">
+        <div class="modal-content">
+            <h2 class="text-2xl font-bold mb-4">Sign Up</h2>
+            <input type="email" id="signup-email" placeholder="Email" required>
+            <input type="password" id="signup-password" placeholder="Password" required>
+            <button onclick="handleSignUp()">Sign Up</button>
+            <p class="text-gray-600 text-sm mt-2">Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+        </div>
+    </div>
+
+    <!-- Hero Section with Slideshow -->
+    <section id="home" class="slideshow-container">
+        <div class="slide">
+            <img src="https://images.pexels.com/photos/244393/pexels-photo-244393.jpeg" alt="Freshly Sourced Red Onions" loading="lazy">
+            <span class="caption">Fresh Red Onions</span>
+        </div>
+        <div class="slide">
+            <img src="https://images.pexels.com/photos/143133/pexels-photo-143133.jpeg" alt="Freshly Sourced Carrots" loading="lazy">
+            <span class="caption">Fresh Carrots</span>
+        </div>
+        <div class="slide">
+            <img src="https://images.pexels.com/photos/2329440/pexels-photo-2329440.jpeg" alt="Freshly Sourced Cucumbers" loading="lazy">
+            <span class="caption">Fresh Cucumbers</span>
+        </div>
+        <div class="slide">
+            <img src="https://images.pexels.com/photos/53494/pexels-photo-53494.jpeg" alt="Freshly Sourced Mushrooms" loading="lazy">
+            <span class="caption">Fresh Mushrooms</span>
+        </div>
+        <div class="slide">
+            <img src="https://images.pexels.com/photos/603030/pexels-photo-603030.jpeg" alt="Freshly Sourced Sweet Corn" loading="lazy">
+            <span class="caption">Fresh Sweet Corn</span>
+        </div>
+        <div class="slide">
+            <img src="https://images.pexels.com/photos/2893635/pexels-photo-2893635.jpeg" alt="Freshly Sourced Green Bell Peppers" loading="lazy">
+            <span class="caption">Fresh Green Bell Peppers</span>
+        </div>
+        <div class="slide">
+            <img src="https://images.pexels.com/photos/4947354/pexels-photo-4947354.jpeg" alt="Freshly Sourced Cabbage" loading="lazy">
+            <span class="caption">Fresh Cabbage</span>
+        </div>
+        <div class="slide">
+            <img src="https://images.pexels.com/photos/8455375/pexels-photo-8455375.jpeg" alt="Freshly Sourced Assorted Vegetables" loading="lazy">
+            <span class="caption">Fresh Assorted Vegetables</span>
+        </div>
+        <div class="slideshow-overlay">
+            <div class="max-w-3xl mx-auto px-4 text-center text-white">
+                <h1 class="text-4xl sm:text-5xl font-bold mb-4">Welcome to Suprova</h1>
+                <p class="text-lg sm:text-xl mb-6">Delivering Supply, Professionalism, and Value to elevate your dining experience.</p>
+            </div>
+        </div>
+        <div class="slideshow-btn prev" onclick="changeSlide(-1)" aria-label="Previous Slide">&#10094;</div>
+        <div class="slideshow-btn next" onclick="changeSlide(1)" aria-label="Next Slide">&#10095;</div>
+        <div class="dots-container"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">About Suprova</h2>
+            <p class="text-lg text-gray-600 text-center max-w-3xl rents: none;
+        }
+        .protected-section.unlocked {
+            filter: none;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="logo">Suprova</div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#home" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                    <a href="#about" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">About</a>
+                    <a href="#services" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Services</a>
+                    <a href="#contact" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    <button id="auth-btn" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium" onclick="toggleAuth()">Login</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <h2 class="text-2xl font-bold mb-4">Login</h2>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button onclick="handleLogin()">Login</button>
+            <p class="text-gray-600 text-sm mt-2">Don't have an account? <a href="#" onclick="showSignUp()">Sign Up</a></p>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div id="signup-modal" class="modal">
+        <div class="modal-content">
+            <h2 class="text-2xl font-bold mb-4">Sign Up</h2>
+            <input type="email" id="signup-email" placeholder="Email" required>
+            <input type="password" id="signup-password" placeholder="Password" required>
+            <button onclick="handleSignUp()">Sign Up</button>
+            <p class="text-gray-600 text-sm mt-2">Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+        </div>
+    </div>
 
     <!-- Hero Section with Slideshow -->
     <section id="home" class="slideshow-container">
@@ -181,10 +350,11 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-16 bg-gray-100">
+    <section id="services" class="py-16 bg-gray-100 protected-section">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">Our Services</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <p class="text-center text-gray-600 mb-8 locked-message" style="display: none;">Please log in to view our services.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 services-content">
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Premium Sourcing</h3>
                     <p class="text-gray-600">We source the finest ingredients to ensure quality and freshness in every dish.</p>
@@ -202,13 +372,13 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-white">
+    <section id="contact" class="py-16 bg-white protected-section">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">Get in Touch</h2>
-            <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-8">
-                Have questions or want to collaborate? Reach out to us today!
+            <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-8 locked-message" style="display: none;">
+                Please log in to view contact details.
             </p>
-            <div class="max-w-lg mx-auto">
+            <div class="max-w-lg mx-auto contact-content">
                 <div class="text-center">
                     <p class="text-gray-600 mb-2">Email: contact@suprova.com</p>
                     <p class="text-gray-600 mb-2">Phone: +91 123-456-7890</p>
@@ -217,19 +387,6 @@
             </div>
         </div>
     </section>
-    <section id="auth" class="py-16 bg-white">
-  <div class="max-w-md mx-auto">
-    <h2 class="text-2xl font-bold text-center mb-6">Login or Sign Up</h2>
-    <input id="email" type="email" placeholder="Email" class="w-full p-2 border mb-4" />
-    <input id="password" type="password" placeholder="Password" class="w-full p-2 border mb-4" />
-    <div class="flex justify-between">
-      <button onclick="login()" class="bg-orange-500 text-white px-4 py-2 rounded">Login</button>
-      <button onclick="signup()" class="bg-green-500 text-white px-4 py-2 rounded">Sign Up</button>
-    </div>
-    <p id="authMessage" class="text-center text-red-600 mt-4"></p>
-  </div>
-</section>
-
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-8">
@@ -240,56 +397,146 @@
             </div>
         </div>
     </footer>
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
 
-<script>
-  // ✅ Your Firebase config
-  const firebaseConfig = {
-    apiKey: "AIzaSyAAlsMvIBJf5N39wjckLszxvC5m_bpnINc",
-    authDomain: "lokart-2dc3c.firebaseapp.com",
-    databaseURL: "https://lokart-2dc3c-default-rtdb.firebaseio.com",
-    projectId: "lokart-2dc3c",
-    storageBucket: "lokart-2dc3c.firebasestorage.app",
-    messagingSenderId: "174715257453",
-    appId: "1:174715257453:web:be4b91210aa1771f587564",
-    measurementId: "G-NGHHKZHCV5"
-  };
+    <script type="module">
+        // Firebase Initialization
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-  // ✅ Initialize Firebase
-  const app = firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
+        const firebaseConfig = {
+            apiKey: "AIzaSyAAlsMvIBJf5N39wjckLszxvC5m_bpnINc",
+            authDomain: "lokart-2dc3c.firebaseapp.com",
+            databaseURL: "https://lokart-2dc3c-default-rtdb.firebaseio.com",
+            projectId: "lokart-2dc3c",
+            storageBucket: "lokart-2dc3c.firebasestorage.app",
+            messagingSenderId: "174715257453",
+            appId: "1:174715257453:web:be4b91210aa1771f587564",
+            measurementId: "G-NGHHKZHCV5"
+        };
 
-  // ✅ Login Function
-  function login() {
-    const email = document.getElementById("email").value;
-    const pass = document.getElementById("password").value;
-    auth.signInWithEmailAndPassword(email, pass)
-      .then(user => {
-        document.getElementById("authMessage").innerText = "✅ Logged in successfully!";
-      })
-      .catch(error => {
-        document.getElementById("authMessage").innerText = "❌ " + error.message;
-      });
-  }
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
 
-  // ✅ Sign Up Function
-  function signup() {
-    const email = document.getElementById("email").value;
-    const pass = document.getElementById("password").value;
-    auth.createUserWithEmailAndPassword(email, pass)
-      .then(user => {
-        document.getElementById("authMessage").innerText = "✅ Signed up successfully!";
-      })
-      .catch(error => {
-        document.getElementById("authMessage").innerText = "❌ " + error.message;
-      });
-  }
-</script>
+        // Existing XLSX Processing
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+            return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+            if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+                try {
+                    var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                    var firstSheetName = workbook.SheetNames[0];
+                    var worksheet = workbook.Sheets[firstSheetName];
+                    var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                    var filteredData = jsonData.filter(row => row.some(filledCell));
+                    var headerRowIndex = filteredData.findIndex((row, index) =>
+                        row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                    );
+                    if (headerRowIndex === -1 || headerRowIndex > 25) {
+                        headerRowIndex = 0;
+                    }
+                    var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex));
+                    csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                    return csv;
+                } catch (e) {
+                    console.error(e);
+                    return "";
+                }
+            }
+            return gk_fileData[filename] || "";
+        }
 
+        // Authentication Logic
+        function toggleAuth() {
+            const authBtn = document.getElementById('auth-btn');
+            if (auth.currentUser) {
+                signOut(auth).then(() => {
+                    authBtn.textContent = 'Login';
+                    updateProtectedSections(false);
+                }).catch((error) => {
+                    console.error('Sign out failed:', error);
+                    alert('Error signing out. Please try again.');
+                });
+            } else {
+                document.getElementById('login-modal').style.display = 'flex';
+            }
+        }
 
-    <script>
+        function showSignUp() {
+            document.getElementById('login-modal').style.display = 'none';
+            document.getElementById('signup-modal').style.display = 'flex';
+        }
+
+        function showLogin() {
+            document.getElementById('signup-modal').style.display = 'none';
+            document.getElementById('login-modal').style.display = 'flex';
+        }
+
+        function handleLogin() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            signInWithEmailAndPassword(auth, email, password)
+                .then(() => {
+                    document.getElementById('login-modal').style.display = 'none';
+                    document.getElementById('auth-btn').textContent = 'Logout';
+                    updateProtectedSections(true);
+                })
+                .catch((error) => {
+                    console.error('Login failed:', error);
+                    alert('Login failed: ' + error.message);
+                });
+        }
+
+        function handleSignUp() {
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            createUserWithEmailAndPassword(auth, email, password)
+                .then(() => {
+                    document.getElementById('signup-modal').style.display = 'none';
+                    document.getElementById('auth-btn').textContent = 'Logout';
+                    updateProtectedSections(true);
+                SVC
+                })
+                .catch((error) => {
+                    console.error('Sign up failed:', error);
+                    alert('Sign up failed: ' + error.message);
+                });
+        }
+
+        function updateProtectedSections(isLoggedIn) {
+            const protectedSections = document.querySelectorAll('.protected-section');
+            protectedSections.forEach(section => {
+                const content = section.querySelector('.services-content, .contact-content');
+                const lockedMessage = section.querySelector('.locked-message');
+                if (isLoggedIn) {
+                    section.classList.add('unlocked');
+                    if (content) content.style.display = 'block';
+                    if (lockedMessage) lockedMessage.style.display = 'none';
+                } else {
+                    section.classList.remove('unlocked');
+                    if (content) content.style.display = 'none';
+                    if (lockedMessage) lockedMessage.style.display = 'block';
+                }
+            });
+        }
+
+        // Monitor authentication state
+        onAuthStateChanged(auth, (user) => {
+            const authBtn = document.getElementById('auth-btn');
+            if (user) {
+                authBtn.textContent = 'Logout';
+                updateProtectedSections(true);
+            } else {
+                authBtn.textContent = 'Login';
+                updateProtectedSections(false);
+            }
+        });
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -335,50 +582,6 @@
         // Auto-slide every 2 seconds
         setInterval(() => changeSlide(1), 2000);
     </script>
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
-
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyAAlsMvIBJf5N39wjckLszxvC5m_bpnINc",
-    authDomain: "lokart-2dc3c.firebaseapp.com",
-    databaseURL: "https://lokart-2dc3c-default-rtdb.firebaseio.com",
-    projectId: "lokart-2dc3c",
-    storageBucket: "lokart-2dc3c.firebasestorage.app",
-    messagingSenderId: "174715257453",
-    appId: "1:174715257453:web:be4b91210aa1771f587564",
-    measurementId: "G-NGHHKZHCV5"
-  };
-
-  // Initialize Firebase
-  const app = firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-
-  function login() {
-    const email = document.getElementById("email").value;
-    const pass = document.getElementById("password").value;
-    auth.signInWithEmailAndPassword(email, pass)
-      .then(user => {
-        alert("✅ Logged in successfully!");
-      })
-      .catch(error => {
-        alert("❌ " + error.message);
-      });
-  }
-
-  function signup() {
-    const email = document.getElementById("email").value;
-    const pass = document.getElementById("password").value;
-    auth.createUserWithEmailAndPassword(email, pass)
-      .then(user => {
-        alert("✅ Signed up successfully!");
-      })
-      .catch(error => {
-        alert("❌ " + error.message);
-      });
-  }
-</script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </body>
 </html>
