@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suprova - Oils & Fats</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
+    <style>
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 2rem;
+            color: #f97316;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+        }
+        .quantity-btn {
+            background: linear-gradient(to right, #f97316, #16a34a);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .quantity-btn:hover {
+            background: linear-gradient(to right, #ea580c, #15803d);
+        }
+        .quantity-input {
+            width: 3rem;
+            text-align: center;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            margin: 0 0.5rem;
+        }
+        #authModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 20;
+        }
+        #authModal.show {
+            display: flex;
+        }
+        #authForm {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+        }
+        #closeModal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="logo">Suprova</div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="index.html#home" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">About</a>
+                    <a href="index.html#services" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Services</a>
+                    <a href="index.html#contact" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    <a href="cart.html" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Your Cart</a>
+                    <button id="authButton" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium" onclick="toggleAuthModal()">Login</button>
+                    <button id="logoutButton" class="hidden text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Authentication Modal -->
+    <div id="authModal">
+        <div id="authForm" class="shadow-lg">
+            <span id="closeModal" onclick="toggleAuthModal()">&times;</span>
+            <h2 id="authTitle" class="text-2xl font-bold text-center mb-4">Login</h2>
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700">Email</label>
+                <input type="email" id="email" class="w-full px-3 py-2 border rounded-md">
+            </div>
+            <div class="mb-4">
+                <label for="password" class="block text-gray-700">Password</label>
+                <input type="password" id="password" class="w-full px-3 py-2 border rounded-md">
+            </div>
+            <button id="authSubmit" class="w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600" onclick="handleAuth()">Login</button>
+            <button class="w-full mt-2 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600" onclick="signInWithGoogle()">Sign in with Google</button>
+            <p class="mt-4 text-center text-gray-600">
+                <a href="#" id="toggleAuthMode" class="text-orange-500 hover:underline" onclick="toggleAuthMode()">Create an account</a>
+            </p>
+            <p id="authError" class="text-red-500 text-center mt-2 hidden"></p>
+        </div>
+    </div>
+
+    <!-- Oils & Fats Section -->
+    <section id="oils-fats" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">Oils & Fats</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border rounded-lg">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-900">Hindi Name</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-900">English Name</th>
+                            <th class="px-6 py-3 text-center text-sm font-medium text-gray-900">Quantity (in kg)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-6 py-4 border-b">सरसों तेल</td>
+                            <td class="px-6 py-4 border-b">Mustard Oil</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('mustard-oil', -1)">-</button>
+                                    <input type="number" id="mustard-oil-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
+                                    <button class="quantity-btn" onclick="updateQuantity('mustard-oil', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">सूरजमुखी तेल</td>
+                            <td class="px-6 py-4 border-b">Sunflower Oil</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('sunflower-oil', -1)">-</button>
+                                    <input type="number" id="sunflower-oil-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
+                                    <button class="quantity-btn" onclick="updateQuantity('sunflower-oil', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">नारियल तेल</td>
+                            <td class="px-6 py-4 border-b">Coconut Oil</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('coconut-oil', -1)">-</button>
+                                    <input type="number" id="coconut-oil-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
+                                    <button class="quantity-btn" onclick="updateQuantity('coconut-oil', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">जैतून तेल</td>
+                            <td class="px-6 py-4 border-b">Olive Oil</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('olive-oil', -1)">-</button>
+                                    <input type="number" id="olive-oil-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
+                                    <button class="quantity-btn" onclick="updateQuantity('olive-oil', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">मूंगफली तेल</td>
+                            <td class="px-6 py-4 border-b">Groundnut Oil</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('groundnut-oil', -1)">-</button>
+                                    <input type="number" id="groundnut-oil-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
+                                    <button class="quantity-btn" onclick="updateQuantity('groundnut-oil', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">देसी घी</td>
+                            <td class="px-6 py-4 border-b">Desi Ghee</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('desi-ghee', -1)">-</button>
+                                    <input type="number" id="desi-ghee-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
+                                    <button class="quantity-btn" onclick="updateQuantity('desi-ghee', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">वनस्पति घी</td>
+                            <td class="px-6 py-4 border-b">Vegetable Ghee</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('vegetable-ghee', -1)">-</button>
+                                    <input type="number" id="vegetable-ghee-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
+                                    <button class="quantity-btn" onclick="updateQuantity('vegetable-ghee', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center mt-8">
+                <button class="bg-orange-500 text-white py-2 px-6 rounded-md hover:bg-orange-600" onclick="addToCart()">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col items-center">
+                <div class="logo mb-4">Suprova</div>
+                <p class="text-gray-400 text-center">© 2025 Suprova. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAAlsMvIBJf5N39wjckLszxvC5m_bpnINc",
+            authDomain: "lokart-2dc3c.firebaseapp.com",
+            databaseURL: "https://lokart-2dc3c-default-rtdb.firebaseio.com",
+            projectId: "lokart-2dc3c",
+            storageBucket: "lokart-2dc3c.firebasestorage.app",
+            messagingSenderId: "174715257453",
+            appId: "1:174715257453:web:be4b91210aa1771f587564",
+            measurementId
