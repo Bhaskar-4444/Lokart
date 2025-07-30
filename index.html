@@ -6,17 +6,62 @@
     <title>Suprova - Supply, Pro, Value</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .hero-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc926');
-            background-size: cover;
-            background-position: center;
-        }
         .logo {
             font-family: 'Arial', sans-serif;
             font-weight: bold;
             font-size: 2rem;
             color: #f97316;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .slide.active {
+            display: block;
+        }
+        .slideshow-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slideshow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+        .slideshow-btn:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+        .prev {
+            left: 20px;
+        }
+        .next {
+            right: 20px;
         }
     </style>
 </head>
@@ -38,13 +83,24 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-bg h-screen flex items-center justify-center text-center text-white">
-        <div class="max-w-3xl mx-auto px-4">
-            <h1 class="text-4xl sm:text-5xl font-bold mb-4">Welcome to Suprova</h1>
-            <p class="text-lg sm:text-xl mb-6">Delivering Supply, Professionalism, and Value to elevate your dining experience.</p>
-            <a href="#about" class="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300">Learn More</a>
+    <!-- Hero Section with Slideshow -->
+    <section id="home" class="slideshow-container">
+        <img src="https://images.pexels.com/photos/244393/pexels-photo-244393.jpeg" alt="Red Onion" class="slide">
+        <img src="https://images.pexels.com/photos/143133/pexels-photo-143133.jpeg" alt="Carrots" class="slide">
+        <img src="https://images.pexels.com/photos/2329440/pexels-photo-2329440.jpeg" alt="Cucumber" class="slide">
+        <img src="https://images.pexels.com/photos/53494/pexels-photo-53494.jpeg" alt="Mushroom" class="slide">
+        <img src="https://images.pexels.com/photos/603030/pexels-photo-603030.jpeg" alt="Sweet Corn" class="slide">
+        <img src="https://images.pexels.com/photos/2893635/pexels-photo-2893635.jpeg" alt="Green Bell Pepper" class="slide">
+        <img src="https://images.pexels.com/photos/4947354/pexels-photo-4947354.jpeg" alt="Cabbage" class="slide">
+        <img src="https://images.pexels.com/photos/8455375/pexels-photo-8455375.jpeg" alt="Assorted Vegetables" class="slide">
+        <div class="slideshow-overlay">
+            <div class="max-w-3xl mx-auto px-4 text-center text-white">
+                <h1 class="text-4xl sm:text-5xl font-bold mb-4">Welcome to Suprova</h1>
+                <p class="text-lg sm:text-xl mb-6">Delivering Supply, Professionalism, and Value to elevate your dining experience.</p>
+            </div>
         </div>
+        <div class="slideshow-btn prev" onclick="changeSlide(-1)">&#10094;</div>
+        <div class="slideshow-btn next" onclick="changeSlide(1)">&#10095;</div>
     </section>
 
     <!-- About Section -->
@@ -116,6 +172,20 @@
                 });
             });
         });
+
+        // Slideshow functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        slides[currentSlide].classList.add('active');
+
+        function changeSlide(direction) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Auto-slide every 2 seconds
+        setInterval(() => changeSlide(1), 2000);
     </script>
 </body>
 </html>
