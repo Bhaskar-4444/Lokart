@@ -217,6 +217,19 @@
             </div>
         </div>
     </section>
+    <section id="auth" class="py-16 bg-white">
+  <div class="max-w-md mx-auto">
+    <h2 class="text-2xl font-bold text-center mb-6">Login or Sign Up</h2>
+    <input id="email" type="email" placeholder="Email" class="w-full p-2 border mb-4" />
+    <input id="password" type="password" placeholder="Password" class="w-full p-2 border mb-4" />
+    <div class="flex justify-between">
+      <button onclick="login()" class="bg-orange-500 text-white px-4 py-2 rounded">Login</button>
+      <button onclick="signup()" class="bg-green-500 text-white px-4 py-2 rounded">Sign Up</button>
+    </div>
+    <p id="authMessage" class="text-center text-red-600 mt-4"></p>
+  </div>
+</section>
+
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-8">
@@ -227,6 +240,54 @@
             </div>
         </div>
     </footer>
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+
+<script>
+  // ✅ Your Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyAAlsMvIBJf5N39wjckLszxvC5m_bpnINc",
+    authDomain: "lokart-2dc3c.firebaseapp.com",
+    databaseURL: "https://lokart-2dc3c-default-rtdb.firebaseio.com",
+    projectId: "lokart-2dc3c",
+    storageBucket: "lokart-2dc3c.firebasestorage.app",
+    messagingSenderId: "174715257453",
+    appId: "1:174715257453:web:be4b91210aa1771f587564",
+    measurementId: "G-NGHHKZHCV5"
+  };
+
+  // ✅ Initialize Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  // ✅ Login Function
+  function login() {
+    const email = document.getElementById("email").value;
+    const pass = document.getElementById("password").value;
+    auth.signInWithEmailAndPassword(email, pass)
+      .then(user => {
+        document.getElementById("authMessage").innerText = "✅ Logged in successfully!";
+      })
+      .catch(error => {
+        document.getElementById("authMessage").innerText = "❌ " + error.message;
+      });
+  }
+
+  // ✅ Sign Up Function
+  function signup() {
+    const email = document.getElementById("email").value;
+    const pass = document.getElementById("password").value;
+    auth.createUserWithEmailAndPassword(email, pass)
+      .then(user => {
+        document.getElementById("authMessage").innerText = "✅ Signed up successfully!";
+      })
+      .catch(error => {
+        document.getElementById("authMessage").innerText = "❌ " + error.message;
+      });
+  }
+</script>
+
 
     <script>
         // Smooth scrolling for navigation links
