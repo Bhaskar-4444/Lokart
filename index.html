@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suprova - Supply, Pro, Value</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Include the generated Tailwind CSS file -->
+    <link rel="stylesheet" href="css/tailwind.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
     <style>
         .logo {
@@ -167,7 +168,7 @@
                     <a href="#about" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">About</a>
                     <a href="#services" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Services</a>
                     <a href="#contact" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
-                    <button id="auth-btn" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium" onclick="toggleAuth()">Login</button>
+                    <button id="auth-btn" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium" onclick="window.toggleAuth()">Login</button>
                 </div>
             </div>
         </div>
@@ -179,8 +180,8 @@
             <h2 class="text-2xl font-bold mb-4">Login</h2>
             <input type="email" id="email" placeholder="Email" required>
             <input type="password" id="password" placeholder="Password" required>
-            <button onclick="handleLogin()">Login</button>
-            <p class="text-gray-600 text-sm mt-2">Don't have an account? <a href="#" onclick="showSignUp()">Sign Up</a></p>
+            <button onclick="window.handleLogin()">Login</button>
+            <p class="text-gray-600 text-sm mt-2">Don't have an account? <a href="#" onclick="window.showSignUp()">Sign Up</a></p>
         </div>
     </div>
 
@@ -190,106 +191,8 @@
             <h2 class="text-2xl font-bold mb-4">Sign Up</h2>
             <input type="email" id="signup-email" placeholder="Email" required>
             <input type="password" id="signup-password" placeholder="Password" required>
-            <button onclick="handleSignUp()">Sign Up</button>
-            <p class="text-gray-600 text-sm mt-2">Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
-        </div>
-    </div>
-
-    <!-- Hero Section with Slideshow -->
-    <section id="home" class="slideshow-container">
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/244393/pexels-photo-244393.jpeg" alt="Freshly Sourced Red Onions" loading="lazy">
-            <span class="caption">Fresh Red Onions</span>
-        </div>
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/143133/pexels-photo-143133.jpeg" alt="Freshly Sourced Carrots" loading="lazy">
-            <span class="caption">Fresh Carrots</span>
-        </div>
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/2329440/pexels-photo-2329440.jpeg" alt="Freshly Sourced Cucumbers" loading="lazy">
-            <span class="caption">Fresh Cucumbers</span>
-        </div>
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/53494/pexels-photo-53494.jpeg" alt="Freshly Sourced Mushrooms" loading="lazy">
-            <span class="caption">Fresh Mushrooms</span>
-        </div>
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/603030/pexels-photo-603030.jpeg" alt="Freshly Sourced Sweet Corn" loading="lazy">
-            <span class="caption">Fresh Sweet Corn</span>
-        </div>
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/2893635/pexels-photo-2893635.jpeg" alt="Freshly Sourced Green Bell Peppers" loading="lazy">
-            <span class="caption">Fresh Green Bell Peppers</span>
-        </div>
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/4947354/pexels-photo-4947354.jpeg" alt="Freshly Sourced Cabbage" loading="lazy">
-            <span class="caption">Fresh Cabbage</span>
-        </div>
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/8455375/pexels-photo-8455375.jpeg" alt="Freshly Sourced Assorted Vegetables" loading="lazy">
-            <span class="caption">Fresh Assorted Vegetables</span>
-        </div>
-        <div class="slideshow-overlay">
-            <div class="max-w-3xl mx-auto px-4 text-center text-white">
-                <h1 class="text-4xl sm:text-5xl font-bold mb-4">Welcome to Suprova</h1>
-                <p class="text-lg sm:text-xl mb-6">Delivering Supply, Professionalism, and Value to elevate your dining experience.</p>
-            </div>
-        </div>
-        <div class="slideshow-btn prev" onclick="changeSlide(-1)" aria-label="Previous Slide">&#10094;</div>
-        <div class="slideshow-btn next" onclick="changeSlide(1)" aria-label="Next Slide">&#10095;</div>
-        <div class="dots-container"></div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">About Suprova</h2>
-            <p class="text-lg text-gray-600 text-center max-w-3xl rents: none;
-        }
-        .protected-section.unlocked {
-            filter: none;
-            pointer-events: auto;
-        }
-    </style>
-</head>
-<body class="bg-gray-100 font-sans">
-    <!-- Navbar -->
-    <nav class="bg-white shadow-lg fixed w-full z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <div class="logo">Suprova</div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <a href="#home" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                    <a href="#about" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">About</a>
-                    <a href="#services" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Services</a>
-                    <a href="#contact" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
-                    <button id="auth-btn" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium" onclick="toggleAuth()">Login</button>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Login Modal -->
-    <div id="login-modal" class="modal">
-        <div class="modal-content">
-            <h2 class="text-2xl font-bold mb-4">Login</h2>
-            <input type="email" id="email" placeholder="Email" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <button onclick="handleLogin()">Login</button>
-            <p class="text-gray-600 text-sm mt-2">Don't have an account? <a href="#" onclick="showSignUp()">Sign Up</a></p>
-        </div>
-    </div>
-
-    <!-- Sign Up Modal -->
-    <div id="signup-modal" class="modal">
-        <div class="modal-content">
-            <h2 class="text-2xl font-bold mb-4">Sign Up</h2>
-            <input type="email" id="signup-email" placeholder="Email" required>
-            <input type="password" id="signup-password" placeholder="Password" required>
-            <button onclick="handleSignUp()">Sign Up</button>
-            <p class="text-gray-600 text-sm mt-2">Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+            <button onclick="window.handleSignUp()">Sign Up</button>
+            <p class="text-gray-600 text-sm mt-2">Already have an account? <a href="#" onclick="window.showLogin()">Login</a></p>
         </div>
     </div>
 
@@ -415,9 +318,15 @@
             measurementId: "G-NGHHKZHCV5"
         };
 
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const auth = getAuth(app);
+        let app, auth;
+        try {
+            app = initializeApp(firebaseConfig);
+            getAnalytics(app);
+            auth = getAuth(app);
+        } catch (error) {
+            console.error('Firebase initialization failed:', error);
+            alert('Failed to initialize Firebase. Please check your configuration.');
+        }
 
         // Existing XLSX Processing
         var gk_isXlsx = false;
@@ -453,6 +362,10 @@
 
         // Authentication Logic
         function toggleAuth() {
+            if (!auth) {
+                alert('Authentication service is not initialized.');
+                return;
+            }
             const authBtn = document.getElementById('auth-btn');
             if (auth.currentUser) {
                 signOut(auth).then(() => {
@@ -460,26 +373,37 @@
                     updateProtectedSections(false);
                 }).catch((error) => {
                     console.error('Sign out failed:', error);
-                    alert('Error signing out. Please try again.');
+                    alert('Error signing out: ' + error.message);
                 });
             } else {
                 document.getElementById('login-modal').style.display = 'flex';
             }
         }
+        window.toggleAuth = toggleAuth; // Expose to global scope
 
         function showSignUp() {
             document.getElementById('login-modal').style.display = 'none';
             document.getElementById('signup-modal').style.display = 'flex';
         }
+        window.showSignUp = showSignUp; // Expose to global scope
 
         function showLogin() {
             document.getElementById('signup-modal').style.display = 'none';
             document.getElementById('login-modal').style.display = 'flex';
         }
+        window.showLogin = showLogin; // Expose to global scope
 
         function handleLogin() {
+            if (!auth) {
+                alert('Authentication service is not initialized.');
+                return;
+            }
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+            if (!email || !password) {
+                alert('Please enter both email and password.');
+                return;
+            }
             signInWithEmailAndPassword(auth, email, password)
                 .then(() => {
                     document.getElementById('login-modal').style.display = 'none';
@@ -487,26 +411,66 @@
                     updateProtectedSections(true);
                 })
                 .catch((error) => {
-                    console.error('Login failed:', error);
-                    alert('Login failed: ' + error.message);
+                    console.error('Login failed:', error.code, error.message);
+                    let errorMessage = 'Login failed. Please try again.';
+                    switch (error.code) {
+                        case 'auth/invalid-email':
+                            errorMessage = 'Invalid email format.';
+                            break;
+                        case 'auth/user-not-found':
+                            errorMessage = 'No user found with this email.';
+                            break;
+                        case 'auth/wrong-password':
+                            errorMessage = 'Incorrect password.';
+                            break;
+                        case 'auth/too-many-requests':
+                            errorMessage = 'Too many attempts. Please try again later.';
+                            break;
+                        default:
+                            errorMessage = `Login failed: ${error.message}`;
+                    }
+                    alert(errorMessage);
                 });
         }
+        window.handleLogin = handleLogin; // Expose to global scope
 
         function handleSignUp() {
+            if (!auth) {
+                alert('Authentication service is not initialized.');
+                return;
+            }
             const email = document.getElementById('signup-email').value;
             const password = document.getElementById('signup-password').value;
+            if (!email || !password) {
+                alert('Please enter both email and password.');
+                return;
+            }
             createUserWithEmailAndPassword(auth, email, password)
                 .then(() => {
                     document.getElementById('signup-modal').style.display = 'none';
                     document.getElementById('auth-btn').textContent = 'Logout';
                     updateProtectedSections(true);
-                SVC
                 })
                 .catch((error) => {
-                    console.error('Sign up failed:', error);
-                    alert('Sign up failed: ' + error.message);
+                    console.error('Sign up failed:', error.code, error.message);
+                    let errorMessage = 'Sign up failed. Please try again.';
+                    switch (error.code) {
+                        case 'auth/email-already-in-use':
+                            errorMessage = 'This email is already in use.';
+                            break;
+                        case 'auth/invalid-email':
+                            errorMessage = 'Invalid email format.';
+                            break;
+                        case 'auth/weak-password':
+                            errorMessage = 'Password is too weak. Use at least 6 characters.';
+                            break;
+                        default:
+                            errorMessage = `Sign up failed: ${error.message}`;
+                    }
+                    alert(errorMessage);
                 });
         }
+        window.handleSignUp = handleSignUp; // Expose to global scope
 
         function updateProtectedSections(isLoggedIn) {
             const protectedSections = document.querySelectorAll('.protected-section');
@@ -526,16 +490,21 @@
         }
 
         // Monitor authentication state
-        onAuthStateChanged(auth, (user) => {
-            const authBtn = document.getElementById('auth-btn');
-            if (user) {
-                authBtn.textContent = 'Logout';
-                updateProtectedSections(true);
-            } else {
-                authBtn.textContent = 'Login';
-                updateProtectedSections(false);
-            }
-        });
+        if (auth) {
+            onAuthStateChanged(auth, (user) => {
+                const authBtn = document.getElementById('auth-btn');
+                if (user) {
+                    authBtn.textContent = 'Logout';
+                    updateProtectedSections(true);
+                } else {
+                    authBtn.textContent = 'Login';
+                    updateProtectedSections(false);
+                }
+            });
+        } else {
+            console.error('Authentication service is not initialized.');
+            alert('Authentication service is not available. Please check Firebase configuration.');
+        }
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
