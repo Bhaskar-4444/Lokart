@@ -238,19 +238,23 @@
     <section id="services" class="py-16 bg-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">Our Services</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Premium Sourcing</h3>
-                    <p class="text-gray-600">We source the finest ingredients to ensure quality and freshness in every dish.</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Catering Solutions</h3>
-                    <p class="text-gray-600">Customized catering for events, with professional service and attention to detail.</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Consulting Services</h3>
-                    <p class="text-gray-600">Expert advice to optimize your food business operations and supply chain.</p>
-                </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <a href="vegetarian.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Vegetarian Items</h3>
+                    <p class="text-gray-600">Explore our range of fresh, plant-based dishes crafted with organic ingredients.</p>
+                </a>
+                <a href="non_vegetarian.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Non-Vegetarian Items</h3>
+                    <p class="text-gray-600">Premium quality meat and seafood sourced sustainably for your dining pleasure.</p>
+                </a>
+                <a href="dry_items.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Dry Items</h3>
+                    <p class="text-gray-600">High-quality dry goods like spices, grains, and snacks for your pantry.</p>
+                </a>
+                <a href="other_items.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Other Items</h3>
+                    <p class="text-gray-600">Discover beverages, supplements, and specialty products to enhance your meals.</p>
+                </a>
             </div>
         </div>
     </section>
@@ -295,23 +299,15 @@
                     var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
                     var firstSheetName = workbook.SheetNames[0];
                     var worksheet = workbook.Sheets[firstSheetName];
-
-                    // Convert sheet to JSON to filter blank rows
                     var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                    // Filter out blank rows (rows where all cells are empty, null, or undefined)
                     var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                    // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
                     var headerRowIndex = filteredData.findIndex((row, index) =>
                       row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
                     );
-                    // Fallback
                     if (headerRowIndex === -1 || headerRowIndex > 25) {
                       headerRowIndex = 0;
                     }
-
-                    // Convert filtered JSON back to CSV
-                    var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                    var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex));
                     csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
                     return csv;
                 } catch (e) {
@@ -324,12 +320,10 @@
     </script>
 
     <script type="module">
-        // Firebase SDK
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-        // Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyAAlsMvIBJf5N39wjckLszxvC5m_bpnINc",
             authDomain: "lokart-2dc3c.firebaseapp.com",
@@ -341,13 +335,11 @@
             measurementId: "G-NGHHKZHCV5"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        // Authentication state handling
         onAuthStateChanged(auth, (user) => {
             const authButton = document.getElementById('authButton');
             const logoutButton = document.getElementById('logoutButton');
@@ -360,7 +352,6 @@
             }
         });
 
-        // Toggle auth modal
         window.toggleAuthModal = function() {
             const modal = document.getElementById('authModal');
             modal.classList.toggle('show');
@@ -369,7 +360,6 @@
             }
         };
 
-        // Toggle between login and signup
         let isLoginMode = true;
         window.toggleAuthMode = function() {
             isLoginMode = !isLoginMode;
@@ -382,7 +372,6 @@
             resetForm();
         };
 
-        // Reset form fields and error
         function resetForm() {
             document.getElementById('email').value = '';
             document.getElementById('password').value = '';
@@ -390,7 +379,6 @@
             document.getElementById('authError').textContent = '';
         }
 
-        // Handle email/password authentication
         window.handleAuth = async function() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
@@ -409,7 +397,6 @@
             }
         };
 
-        // Handle Google sign-in
         window.signInWithGoogle = async function() {
             try {
                 await signInWithPopup(auth, provider);
@@ -421,7 +408,6 @@
             }
         };
 
-        // Handle logout
         window.logout = async function() {
             try {
                 await signOut(auth);
@@ -434,12 +420,15 @@
     <script>
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+            const href = anchor.getAttribute('href');
+            if (href && href !== '#' && document.querySelector(href)) {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 });
-            });
+            }
         });
 
         // Slideshow functionality
@@ -447,7 +436,6 @@
         const slides = document.querySelectorAll('.slide');
         const dotsContainer = document.querySelector('.dots-container');
 
-        // Create dots dynamically
         slides.forEach((_, i) => {
             const dot = document.createElement('span');
             dot.classList.add('dot');
@@ -474,7 +462,6 @@
             document.querySelectorAll('.dot')[currentSlide].classList.add('active');
         }
 
-        // Auto-slide every 2 seconds
         setInterval(() => changeSlide(1), 2000);
     </script>
 </body>
