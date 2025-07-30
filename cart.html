@@ -96,23 +96,23 @@
     <section id="cart" class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">Your Cart</h2>
-            <div class="overflow-x-auto">
-                <table class="min-w-full bg-white border rounded-lg" id="cartTable">
+            <div id="cartItems" class="overflow-x-auto">
+                <table class="min-w-full bg-white border rounded-lg">
                     <thead>
                         <tr class="bg-gray-100">
                             <th class="px-6 py-3 text-left text-sm font-medium text-gray-900">Hindi Name</th>
                             <th class="px-6 py-3 text-left text-sm font-medium text-gray-900">English Name</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-900">Details</th>
                             <th class="px-6 py-3 text-center text-sm font-medium text-gray-900">Quantity (in kg)</th>
                         </tr>
                     </thead>
-                    <tbody id="cartItems">
-                        <!-- Cart items will be populated dynamically -->
+                    <tbody id="cartTableBody">
+                        <!-- Cart items will be populated here -->
                     </tbody>
                 </table>
             </div>
-            <div class="text-center mt-8 flex justify-center space-x-4">
-                <button class="bg-orange-500 text-white py-2 px-6 rounded-md hover:bg-orange-600" onclick="placeOrder()">Place Order</button>
-                <button class="bg-red-500 text-white py-2 px-6 rounded-md hover:bg-red-600" onclick="clearCart()">Clear Cart</button>
+            <div class="text-center mt-8">
+                <button class="bg-orange-500 text-white py-2 px-6 rounded-md hover:bg-orange-600" onclick="clearCart()">Clear Cart</button>
             </div>
         </div>
     </section>
@@ -223,59 +223,36 @@
                 console.error('Logout error:', error);
             }
         };
-    </script>
-
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            const href = anchor.getAttribute('href');
-            if (href && href !== '#' && document.querySelector(href)) {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(href).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            }
-        });
 
         // Load cart items
         window.onload = function() {
             const cart = JSON.parse(localStorage.getItem('cart') || '{}');
-            const cartItems = document.getElementById('cartItems');
-            if (Object.keys(cart).length === 0) {
-                cartItems.innerHTML = '<tr><td colspan="3" class="px-6 py-4 text-center text-gray-600">Your cart is empty.</td></tr>';
-            } else {
-                cartItems.innerHTML = '';
-                for (const itemId in cart) {
-                    const item = cart[itemId];
-                    cartItems.innerHTML += `
-                        <tr>
-                            <td class="px-6 py-4 border-b">${item.hindi}</td>
-                            <td class="px-6 py-4 border-b">${item.english}</td>
-                            <td class="px-6 py-4 border-b text-center">${item.quantity} kg</td>
-                        </tr>
-                    `;
-                }
-            }
-        };
+            const cartTableBody = document.getElementById('cartTableBody');
 
-        // Place order function
-        window.placeOrder = function() {
-            const cart = JSON.parse(localStorage.getItem('cart') || '{}');
-            if (Object.keys(cart).length > 0) {
-                alert('Order placed successfully! Details:\n' + JSON.stringify(cart, null, 2));
-                localStorage.removeItem('cart');
-                window.location.reload();
-            } else {
-                alert('Your cart is empty. Please add items to place an order.');
+            if (Object.keys(cart).length === 0) {
+                cartTableBody.innerHTML = '<tr><td colspan="4" class="px-6 py-4 text-center text-gray-600">Your cart is empty.</td></tr>';
+                return;
+            }
+
+            cartTableBody.innerHTML = '';
+            for (const itemId in cart) {
+                const item = cart[itemId];
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="px-6 py-4 border-b">${item.hindi}</td>
+                    <td class="px-6 py-4 border-b">${item.english}</td>
+                    <td class="px-6 py-4 border-b">${item.details || '-'}</td>
+                    <td class="px-6 py-4 border-b text-center">${item.quantity}</td>
+                `;
+                cartTableBody.appendChild(row);
             }
         };
 
         // Clear cart function
         window.clearCart = function() {
             localStorage.removeItem('cart');
-            window.location.reload();
+            document.getElementById('cartTableBody').innerHTML = '<tr><td colspan="4" class="px-6 py-4 text-center text-gray-600">Your cart is empty.</td></tr>';
+            alert('Cart cleared successfully!');
         };
     </script>
 </body>
