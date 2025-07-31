@@ -124,6 +124,8 @@
                         <tr class="bg-gray-100">
                             <th class="px-6 py-3 text-left text-sm font-medium text-gray-900">Hindi Name</th>
                             <th class="px-6 py-3 text-left text-sm font-medium text-gray-900">English Name</th>
+                            <th class="px-6 py-3 text-center text-sm font-medium text-gray-900">Mandi Rate (₹/kg)</th>
+                            <th class="px-6 py-3 text-center text-sm font-medium text-gray-900">My Rate (₹/kg)</th>
                             <th class="px-6 py-3 text-center text-sm font-medium text-gray-900">Quantity (in kg)</th>
                         </tr>
                     </thead>
@@ -131,6 +133,8 @@
                         <tr>
                             <td class="px-6 py-4 border-b">मुर्गी</td>
                             <td class="px-6 py-4 border-b">Chicken</td>
+                            <td class="px-6 py-4 border-b text-center">250</td>
+                            <td class="px-6 py-4 border-b text-center">200</td>
                             <td class="px-6 py-4 border-b text-center">
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('chicken', -1)">-</button>
@@ -143,6 +147,8 @@
                         <tr>
                             <td class="px-6 py-4 border-b">मटन</td>
                             <td class="px-6 py-4 border-b">Mutton</td>
+                            <td class="px-6 py-4 border-b text-center">800</td>
+                            <td class="px-6 py-4 border-b text-center">640</td>
                             <td class="px-6 py-4 border-b text-center">
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('mutton', -1)">-</button>
@@ -153,20 +159,150 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="px-6 py-4 border-b">मछली</td>
-                            <td class="px-6 py-4 border-b">Fish</td>
+                            <td class="px-6 py-4 border-b">रोहु</td>
+                            <td class="px-6 py-4 border-b">Rohu (Indian Carp)</td>
+                            <td class="px-6 py-4 border-b text-center">250</td>
+                            <td class="px-6 py-4 border-b text-center">200</td>
                             <td class="px-6 py-4 border-b text-center">
                                 <div class="flex items-center justify-center">
-                                    <button class="quantity-btn" onclick="updateQuantity('fish', -1)">-</button>
-                                    <input type="number" id="fish-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <button class="quantity-btn" onclick="updateQuantity('rohu', -1)">-</button>
+                                    <input type="number" id="rohu-quantity" class="quantity-input" value="0" min="0" readonly>
                                     <span class="ml-2">in kg</span>
-                                    <button class="quantity-btn" onclick="updateQuantity('fish', 1)">+</button>
+                                    <button class="quantity-btn" onclick="updateQuantity('rohu', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">कटला</td>
+                            <td class="px-6 py-4 border-b">Katla (Bocha Carp)</td>
+                            <td class="px-6 py-4 border-b text-center">250</td>
+                            <td class="px-6 py-4 border-b text-center">200</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('katla', -1)">-</button>
+                                    <input type="number" id="katla-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
+                                    <button class="quantity-btn" onclick="updateQuantity('katla', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">कॉमन कार्प</td>
+                            <td class="px-6 py-4 border-b">Common Carp</td>
+                            <td class="px-6 py-4 border-b text-center">250</td>
+                            <td class="px-6 py-4 border-b text-center">200</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('common-carp', -1)">-</button>
+                                    <input type="number" id="common-carp-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
+                                    <button class="quantity-btn" onclick="updateQuantity('common-carp', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">मृगल</td>
+                            <td class="px-6 py-4 border-b">Mrigal Carp</td>
+                            <td class="px-6 py-4 border-b text-center">250</td>
+                            <td class="px-6 py-4 border-b text-center">200</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('mrigal', -1)">-</button>
+                                    <input type="number" id="mrigal-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
+                                    <button class="quantity-btn" onclick="updateQuantity('mrigal', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">सिंघी</td>
+                            <td class="px-6 py-4 border-b">Singhi Fish</td>
+                            <td class="px-6 py-4 border-b text-center">227</td>
+                            <td class="px-6 py-4 border-b text-center">182</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('singhi', -1)">-</button>
+                                    <input type="number" id="singhi-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
+                                    <button class="quantity-btn" onclick="updateQuantity('singhi', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">रेनबो ट्राउट</td>
+                            <td class="px-6 py-4 border-b">Rainbow Trout</td>
+                            <td class="px-6 py-4 border-b text-center">450</td>
+                            <td class="px-6 py-4 border-b text-center">360</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('rainbow-trout', -1)">-</button>
+                                    <input type="number" id="rainbow-trout-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
+                                    <button class="quantity-btn" onclick="updateQuantity('rainbow-trout', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">मुररेल</td>
+                            <td class="px-6 py-4 border-b">Murrel (Snakehead Carp)</td>
+                            <td class="px-6 py-4 border-b text-center">300</td>
+                            <td class="px-6 py-4 border-b text-center">240</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('murrel', -1)">-</button>
+                                    <input type="number" id="murrel-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
+                                    <button class="quantity-btn" onclick="updateQuantity('murrel', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">सीर फिश</td>
+                            <td class="px-6 py-4 border-b">Seer Fish (Vanjaram)</td>
+                            <td class="px-6 py-4 border-b text-center">1350</td>
+                            <td class="px-6 py-4 border-b text-center">1080</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('seer-fish', -1)">-</button>
+                                    <input type="number" id="seer-fish-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
+                                    <button class="quantity-btn" onclick="updateQuantity('seer-fish', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">ब्लैक पोम्फ्रेट</td>
+                            <td class="px-6 py-4 border-b">Black Pomfret</td>
+                            <td class="px-6 py-4 border-b text-center">585</td>
+                            <td class="px-6 py-4 border-b text-center">468</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('black-pomfret', -1)">-</button>
+                                    <input type="number" id="black-pomfret-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
+                                    <button class="quantity-btn" onclick="updateQuantity('black-pomfret', 1)">+</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 border-b">सिल्वर पोम्फ्रेट</td>
+                            <td class="px-6 py-4 border-b">Silver Pomfret</td>
+                            <td class="px-6 py-4 border-b text-center">585</td>
+                            <td class="px-6 py-4 border-b text-center">468</td>
+                            <td class="px-6 py-4 border-b text-center">
+                                <div class="flex items-center justify-center">
+                                    <button class="quantity-btn" onclick="updateQuantity('silver-pomfret', -1)">-</button>
+                                    <input type="number" id="silver-pomfret-quantity" class="quantity-input" value="0" min="0" readonly>
+                                    <span class="ml-2">in kg</span>
+                                    <button class="quantity-btn" onclick="updateQuantity('silver-pomfret', 1)">+</button>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td class="px-6 py-4 border-b">झींगा</td>
                             <td class="px-6 py-4 border-b">Prawns</td>
+                            <td class="px-6 py-4 border-b text-center">600</td>
+                            <td class="px-6 py-4 border-b text-center">480</td>
                             <td class="px-6 py-4 border-b text-center">
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('prawns', -1)">-</button>
@@ -179,6 +315,8 @@
                         <tr>
                             <td class="px-6 py-4 border-b">केकड़ा</td>
                             <td class="px-6 py-4 border-b">Crab</td>
+                            <td class="px-6 py-4 border-b text-center">500</td>
+                            <td class="px-6 py-4 border-b text-center">400</td>
                             <td class="px-6 py-4 border-b text-center">
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('crab', -1)">-</button>
@@ -191,6 +329,8 @@
                         <tr>
                             <td class="px-6 py-4 border-b">अंडा</td>
                             <td class="px-6 py-4 border-b">Egg</td>
+                            <td class="px-6 py-4 border-b text-center">120</td>
+                            <td class="px-6 py-4 border-b text-center">96</td>
                             <td class="px-6 py-4 border-b text-center">
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('egg', -1)">-</button>
@@ -203,6 +343,8 @@
                         <tr>
                             <td class="px-6 py-4 border-b">बटेर</td>
                             <td class="px-6 py-4 border-b">Quail</td>
+                            <td class="px-6 py-4 border-b text-center">400</td>
+                            <td class="px-6 py-4 border-b text-center">320</td>
                             <td class="px-6 py-4 border-b text-center">
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('quail', -1)">-</button>
@@ -215,6 +357,8 @@
                         <tr>
                             <td class="px-6 py-4 border-b">टर्की</td>
                             <td class="px-6 py-4 border-b">Turkey</td>
+                            <td class="px-6 py-4 border-b text-center">700</td>
+                            <td class="px-6 py-4 border-b text-center">560</td>
                             <td class="px-6 py-4 border-b text-center">
                                 <div class="flex items-center justify-center">
                                     <button class="quantity-btn" onclick="updateQuantity('turkey', -1)">-</button>
@@ -368,14 +512,23 @@
             const order = {};
             const inputs = document.querySelectorAll('.quantity-input');
             const items = [
-                { id: 'chicken', hindi: 'मुर्गी', english: 'Chicken' },
-                { id: 'mutton', hindi: 'मटन', english: 'Mutton' },
-                { id: 'fish', hindi: 'मछली', english: 'Fish' },
-                { id: 'prawns', hindi: 'झींगा', english: 'Prawns' },
-                { id: 'crab', hindi: 'केकड़ा', english: 'Crab' },
-                { id: 'egg', hindi: 'अंडा', english: 'Egg' },
-                { id: 'quail', hindi: 'बटेर', english: 'Quail' },
-                { id: 'turkey', hindi: 'टर्की', english: 'Turkey' }
+                { id: 'chicken', hindi: 'मुर्गी', english: 'Chicken', myRate: 200 },
+                { id: 'mutton', hindi: 'मटन', english: 'Mutton', myRate: 640 },
+                { id: 'rohu', hindi: 'रोहु', english: 'Rohu (Indian Carp)', myRate: 200 },
+                { id: 'katla', hindi: 'कटला', english: 'Katla (Bocha Carp)', myRate: 200 },
+                { id: 'common-carp', hindi: 'कॉमन कार्प', english: 'Common Carp', myRate: 200 },
+                { id: 'mrigal', hindi: 'मृगल', english: 'Mrigal Carp', myRate: 200 },
+                { id: 'singhi', hindi: 'सिंघी', english: 'Singhi Fish', myRate: 182 },
+                { id: 'rainbow-trout', hindi: 'रेनबो ट्राउट', english: 'Rainbow Trout', myRate: 360 },
+                { id: 'murrel', hindi: 'मुररेल', english: 'Murrel (Snakehead Carp)', myRate: 240 },
+                { id: 'seer-fish', hindi: 'सीर फिश', english: 'Seer Fish (Vanjaram)', myRate: 1080 },
+                { id: 'black-pomfret', hindi: 'ब्लैक पोम्फ्रेट', english: 'Black Pomfret', myRate: 468 },
+                { id: 'silver-pomfret', hindi: 'सिल्वर पोम्फ्रेट', english: 'Silver Pomfret', myRate: 468 },
+                { id: 'prawns', hindi: 'झींगा', english: 'Prawns', myRate: 480 },
+                { id: 'crab', hindi: 'केकड़ा', english: 'Crab', myRate: 400 },
+                { id: 'egg', hindi: 'अंडा', english: 'Egg', myRate: 96 },
+                { id: 'quail', hindi: 'बटेर', english: 'Quail', myRate: 320 },
+                { id: 'turkey', hindi: 'टर्की', english: 'Turkey', myRate: 560 }
             ];
 
             inputs.forEach(input => {
@@ -384,7 +537,7 @@
                 if (quantity > 0) {
                     const item = items.find(i => i.id === itemId);
                     if (item) {
-                        order[itemId] = { hindi: item.hindi, english: item.english, quantity };
+                        order[itemId] = { hindi: item.hindi, english: item.english, quantity, myRate: item.myRate };
                     }
                 }
             });
