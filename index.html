@@ -47,6 +47,16 @@
             cursor: pointer;
             font-size: 1.5rem;
         }
+        /* Updated styles for full-screen hero section */
+        #home {
+            min-height: 100vh; /* Full viewport height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100vw; /* Full viewport width */
+            padding-top: 64px; /* Offset for fixed navbar height */
+            box-sizing: border-box;
+        }
     </style>
 </head>
 <body class="bg-gray-100 font-sans">
@@ -96,8 +106,7 @@
     <section id="home" class="bg-gradient-to-r from-orange-400 to-green-500 text-white py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">Welcome to Suprova</h1>
-            <p class="text-lg md:text-xl mb-6">Empowering every kitchen with trust, quality, and value
-           
+            <p class="text-lg md:text-xl mb-6">Empowering every kitchen with trust, quality, and value</p>
         </div>
     </section>
 
@@ -189,7 +198,7 @@
         </div>
     </section>
 
-    <!-- About Section (Moved below Contact) -->
+    <!-- About Section -->
     <section id="about" class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">About Us</h2>
@@ -225,4 +234,103 @@
             projectId: "lokart-2dc3c",
             storageBucket: "lokart-2dc3c.firebasestorage.app",
             messagingSenderId: "174715257453",
-            appId: "1:174715257453:web:be4b91210aa1771f587564
+            appId: "1:174715257453:web:be4b91210aa1771f587564"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        // Toggle Authentication Modal
+        function toggleAuthModal() {
+            const modal = document.getElementById('authModal');
+            modal.classList.toggle('show');
+        }
+
+        // Toggle between Login and Sign Up
+        function toggleAuthMode() {
+            const authTitle = document.getElementById('authTitle');
+            const authSubmit = document.getElementById('authSubmit');
+            const toggleAuthMode = document.getElementById('toggleAuthMode');
+            if (authTitle.textContent === 'Login') {
+                authTitle.textContent = 'Sign Up';
+                authSubmit.textContent = 'Sign Up';
+                toggleAuthMode.textContent = 'Already have an account? Login';
+            } else {
+                authTitle.textContent = 'Login';
+                authSubmit.textContent = 'Login';
+                toggleAuthMode.textContent = 'Create an account';
+            }
+        }
+
+        // Handle Authentication
+        function handleAuth() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const authTitle = document.getElementById('authTitle').textContent;
+            const authError = document.getElementById('authError');
+
+            if (authTitle === 'Login') {
+                signInWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        toggleAuthModal();
+                        document.getElementById('authButton').classList.add('hidden');
+                        document.getElementById('logoutButton').classList.remove('hidden');
+                    })
+                    .catch((error) => {
+                        authError.textContent = error.message;
+                        authError.classList.remove('hidden');
+                    });
+            } else {
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        toggleAuthModal();
+                        document.getElementById('authButton').classList.add('hidden');
+                        document.getElementById('logoutButton').classList.remove('hidden');
+                    })
+                    .catch((error) => {
+                        authError.textContent = error.message;
+                        authError.classList.remove('hidden');
+                    });
+            }
+        }
+
+        // Sign in with Google
+        function signInWithGoogle() {
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    toggleAuthModal();
+                    document.getElementById('authButton').classList.add('hidden');
+                    document.getElementById('logoutButton').classList.remove('hidden');
+                })
+                .catch((error) => {
+                    const authError = document.getElementById('authError');
+                    authError.textContent = error.message;
+                    authError.classList.remove('hidden');
+                });
+        }
+
+        // Logout
+        function logout() {
+            signOut(auth).then(() => {
+                document.getElementById('authButton').classList.remove('hidden');
+                document.getElementById('logoutButton').classList.add('hidden');
+            }).catch((error) => {
+                console.error('Logout Error:', error);
+            });
+        }
+
+        // Check Auth State
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('authButton').classList.add('hidden');
+                document.getElementById('logoutButton').classList.remove('hidden');
+            } else {
+                document.getElementById('authButton').classList.remove('hidden');
+                document.getElementById('logoutButton').classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
