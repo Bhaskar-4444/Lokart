@@ -266,22 +266,31 @@
     </footer>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
 
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         const firebaseConfig = {
-            apiKey: "AIzaSyAAlsMvIBJf5N39wjckLszxvC5m_bpnINc",
-            authDomain: "lokart-2dc3c.firebaseapp.com",
-            databaseURL: "https://lokart-2dc3c-default-rtdb.firebaseio.com",
-            projectId: "lokart-2dc3c",
-            storageBucket: "lokart-2dc3c.firebasestorage.app",
-            messagingSenderId: "174715257453",
-            appId: "1:174715257453:web:be4b91210aa1771f587564"
+          apiKey: "AIzaSyAAlsMvIBJf5N39wjckLszxvC5m_bpnINc",
+          authDomain: "lokart-2dc3c.firebaseapp.com",
+          databaseURL: "https://lokart-2dc3c-default-rtdb.firebaseio.com",
+          projectId: "lokart-2dc3c",
+          storageBucket: "lokart-2dc3c.firebasestorage.app",
+          messagingSenderId: "174715257453",
+          appId: "1:174715257453:web:be4b91210aa1771f587564",
+          measurementId: "G-NGHHKZHCV5"
         };
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
