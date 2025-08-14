@@ -47,59 +47,6 @@
             cursor: pointer;
             font-size: 1.5rem;
         }
-        /* Updated styles for full-screen hero section */
-        #home {
-            min-height: 100vh; /* Full viewport height */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100vw; /* Full viewport width */
-            padding-top: 64px; /* Offset for fixed navbar height */
-            box-sizing: border-box;
-          <!-- Hero Section with Slideshow -->
-    <section id="home" class="slideshow-container">
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/244393/pexels-photo-244393.jpeg" alt="Freshly Sourced Red Onions" loading="lazy">
-            <span class="caption">Fresh Red Onions</span>
-        </div>
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/143133/pexels-photo-143133.jpeg" alt="Freshly Sourced Carrots" loading="lazy">
-            <span class="caption">Fresh Carrots</span>
-        </div>
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/2329440/pexels-photo-2329440.jpeg" alt="Freshly Sourced Cucumbers" loading="lazy">
-            <span class="caption">Fresh Cucumbers</span>
-        </div>
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/53494/pexels-photo-53494.jpeg" alt="Freshly Sourced Mushrooms" loading="lazy">
-            <span class="caption">Fresh Mushrooms</span>
-        </div>
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/603030/pexels-photo-603030.jpeg" alt="Freshly Sourced Sweet Corn" loading="lazy">
-            <span class="caption">Fresh Sweet Corn</span>
-        </div>
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/2893635/pexels-photo-2893635.jpeg" alt="Freshly Sourced Green Bell Peppers" loading="lazy">
-            <span class="caption">Fresh Green Bell Peppers</span>
-        </div>
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/4947354/pexels-photo-4947354.jpeg" alt="Freshly Sourced Cabbage" loading="lazy">
-            <span class="caption">Fresh Cabbage</span>
-        </div>
-        <div class="slide">
-            <img src="https://images.pexels.com/photos/8455375/pexels-photo-8455375.jpeg" alt="Freshly Sourced Assorted Vegetables" loading="lazy">
-            <span class="caption">Fresh Assorted Vegetables</span>
-        </div>
-        <div class="slideshow-overlay">
-            <div class="max-w-3xl mx-auto px-4 text-center text-white">
-                <h1 class="text-4xl sm:text-5xl font-bold mb-4">Welcome to Suprova</h1>
-                <p class="text-lg sm:text-xl mb-6">Delivering Supply, Professionalism, and Value to elevate your dining experience.</p>
-            </div>
-        </div>
-        <div class="slideshow-btn prev" onclick="changeSlide(-1)" aria-label="Previous Slide">&#10094;</div>
-        <div class="slideshow-btn next" onclick="changeSlide(1)" aria-label="Next Slide">&#10095;</div>
-        <div class="dots-container"></div>
-    </section>}
     </style>
 </head>
 <body class="bg-gray-100 font-sans">
@@ -127,20 +74,16 @@
     <div id="authModal">
         <div id="authForm" class="shadow-lg">
             <span id="closeModal" onclick="toggleAuthModal()">&times;</span>
-            <h2 id="authTitle" class="text-2xl font-bold text-center mb-4">Login</h2>
+            <h2 class="text-2xl font-bold text-center mb-4">Login with Phone</h2>
             <div class="mb-4">
-                <label for="email" class="block text-gray-700">Email</label>
-                <input type="email" id="email" class="w-full px-3 py-2 border rounded-md">
+                <label for="phone" class="block text-gray-700">Phone Number</label>
+                <input type="tel" id="phone" class="w-full px-3 py-2 border rounded-md" placeholder="+91xxxxxxxxxx" required>
             </div>
-            <div class="mb-4">
-                <label for="password" class="block text-gray-700">Password</label>
-                <input type="password" id="password" class="w-full px-3 py-2 border rounded-md">
+            <div id="otpSection" class="mb-4 hidden">
+                <label for="otp" class="block text-gray-700">Enter OTP</label>
+                <input type="text" id="otp" class="w-full px-3 py-2 border rounded-md" placeholder="6-digit OTP" required>
             </div>
-            <button id="authSubmit" class="w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600" onclick="handleAuth()">Login</button>
-            <button class="w-full mt-2 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600" onclick="signInWithGoogle()">Sign in with Google</button>
-            <p class="mt-4 text-center text-gray-600">
-                <a href="#" id="toggleAuthMode" class="text-orange-500 hover:underline" onclick="toggleAuthMode()">Create an account</a>
-            </p>
+            <button id="authSubmit" class="w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600" onclick="sendOTP()">Send OTP</button>
             <p id="authError" class="text-red-500 text-center mt-2 hidden"></p>
         </div>
     </div>
@@ -200,7 +143,6 @@
             <h2 class="text-4xl font-bold text-gray-900 text-center mb-8">Get in Touch</h2>
             <p class="text-lg text-gray-600 text-center mb-12">We’re here to assist you! Reach out to us through any of the channels below or explore our delivery locations.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Contact Information -->
                 <div class="bg-white p-8 rounded-lg shadow-lg">
                     <h3 class="text-2xl font-semibold text-gray-900 mb-6">Contact Information</h3>
                     <div class="space-y-4">
@@ -222,7 +164,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Customer Service & Locations -->
                 <div class="bg-white p-8 rounded-lg shadow-lg">
                     <h3 class="text-2xl font-semibold text-gray-900 mb-6">Customer Service & Locations</h3>
                     <div class="space-y-4">
@@ -247,8 +188,8 @@
             <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">About Us</h2>
             <p class="text-gray-600 text-center">
                 At Suprova, we believe that great food starts with great ingredients.
-                We are a next-generation food and raw material supply brand, dedicated to serving restaurants, hotels, caterers, and food businesses with unmatched quality, timely delivery, and transparent pricing
-                Our name stands for Supply, Professionalism, and Value — and that's exactly what we deliver. Whether it's fresh produce, pantry staples, or bulk essentials, we ensure your kitchen never stops
+                We are a next-generation food and raw material supply brand, dedicated to serving restaurants, hotels, caterers, and food businesses with unmatched quality, timely delivery, and transparent pricing.
+                Our name stands for Supply, Professionalism, and Value — and that's exactly what we deliver. Whether it's fresh produce, pantry staples, or bulk essentials, we ensure your kitchen never stops.
                 We’re not just a supplier; we are your behind-the-scenes partner in every dish you serve.
                 Let’s grow together — one delivery at a time.
             </p>
@@ -266,98 +207,94 @@
     </footer>
 
     <script type="module">
-        // Import the functions you need from the SDKs you need
+        // Import Firebase SDKs
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-analytics.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
+        import { getAuth, signInWithPhoneNumber, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        // Firebase configuration
         const firebaseConfig = {
-          apiKey: "AIzaSyAAlsMvIBJf5N39wjckLszxvC5m_bpnINc",
-          authDomain: "lokart-2dc3c.firebaseapp.com",
-          databaseURL: "https://lokart-2dc3c-default-rtdb.firebaseio.com",
-          projectId: "lokart-2dc3c",
-          storageBucket: "lokart-2dc3c.firebasestorage.app",
-          messagingSenderId: "174715257453",
-          appId: "1:174715257453:web:be4b91210aa1771f587564",
-          measurementId: "G-NGHHKZHCV5"
+            apiKey: "AIzaSyAAlsMvIBJf5N39wjckLszxvC5m_bpnINc",
+            authDomain: "lokart-2dc3c.firebaseapp.com",
+            databaseURL: "https://lokart-2dc3c-default-rtdb.firebaseio.com",
+            projectId: "lokart-2dc3c",
+            storageBucket: "lokart-2dc3c.firebasestorage.app",
+            messagingSenderId: "174715257453",
+            appId: "1:174715257453:web:be4b91210aa1771f587564",
+            measurementId: "G-NGHHKZHCV5"
         };
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
-
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-
         const auth = getAuth(app);
-        const provider = new GoogleAuthProvider();
+
+        // Initialize reCAPTCHA verifier (required for phone auth)
+        let recaptchaVerifier;
+        window.onload = () => {
+            recaptchaVerifier = new RecaptchaVerifier('authSubmit', {
+                'size': 'invisible',
+                'callback': () => {
+                    sendOTP();
+                }
+            }, auth);
+        };
 
         // Toggle Authentication Modal
         function toggleAuthModal() {
             const modal = document.getElementById('authModal');
+            const authError = document.getElementById('authError');
             modal.classList.toggle('show');
+            authError.classList.add('hidden'); // Reset error
+            document.getElementById('otpSection').classList.add('hidden'); // Hide OTP section
+            document.getElementById('authSubmit').textContent = 'Send OTP'; // Reset button text
         }
 
-        // Toggle between Login and Sign Up
-        function toggleAuthMode() {
-            const authTitle = document.getElementById('authTitle');
+        // Send OTP
+        function sendOTP() {
+            const phone = document.getElementById('phone').value;
+            const authError = document.getElementById('authError');
             const authSubmit = document.getElementById('authSubmit');
-            const toggleAuthMode = document.getElementById('toggleAuthMode');
-            if (authTitle.textContent === 'Login') {
-                authTitle.textContent = 'Sign Up';
-                authSubmit.textContent = 'Sign Up';
-                toggleAuthMode.textContent = 'Already have an account? Login';
-            } else {
-                authTitle.textContent = 'Login';
-                authSubmit.textContent = 'Login';
-                toggleAuthMode.textContent = 'Create an account';
+
+            if (!phone.match(/^\+91[0-9]{10}$/)) {
+                authError.textContent = 'Please enter a valid phone number (+91xxxxxxxxxx)';
+                authError.classList.remove('hidden');
+                return;
             }
+
+            signInWithPhoneNumber(auth, phone, recaptchaVerifier)
+                .then((confirmationResult) => {
+                    window.confirmationResult = confirmationResult;
+                    document.getElementById('otpSection').classList.remove('hidden');
+                    authSubmit.textContent = 'Verify OTP';
+                    authSubmit.onclick = verifyOTP;
+                    authError.classList.add('hidden');
+                })
+                .catch((error) => {
+                    authError.textContent = error.message;
+                    authError.classList.remove('hidden');
+                    recaptchaVerifier.reset();
+                });
         }
 
-        // Handle Authentication
-        function handleAuth() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const authTitle = document.getElementById('authTitle').textContent;
+        // Verify OTP
+        function verifyOTP() {
+            const otp = document.getElementById('otp').value;
             const authError = document.getElementById('authError');
 
-            if (authTitle === 'Login') {
-                signInWithEmailAndPassword(auth, email, password)
-                    .then((userCredential) => {
-                        toggleAuthModal();
-                        document.getElementById('authButton').classList.add('hidden');
-                        document.getElementById('logoutButton').classList.remove('hidden');
-                    })
-                    .catch((error) => {
-                        authError.textContent = error.message;
-                        authError.classList.remove('hidden');
-                    });
-            } else {
-                createUserWithEmailAndPassword(auth, email, password)
-                    .then((userCredential) => {
-                        toggleAuthModal();
-                        document.getElementById('authButton').classList.add('hidden');
-                        document.getElementById('logoutButton').classList.remove('hidden');
-                    })
-                    .catch((error) => {
-                        authError.textContent = error.message;
-                        authError.classList.remove('hidden');
-                    });
+            if (!otp.match(/^[0-9]{6}$/)) {
+                authError.textContent = 'Please enter a valid 6-digit OTP';
+                authError.classList.remove('hidden');
+                return;
             }
-        }
 
-        // Sign in with Google
-        function signInWithGoogle() {
-            signInWithPopup(auth, provider)
+            window.confirmationResult.confirm(otp)
                 .then((result) => {
                     toggleAuthModal();
                     document.getElementById('authButton').classList.add('hidden');
                     document.getElementById('logoutButton').classList.remove('hidden');
                 })
                 .catch((error) => {
-                    const authError = document.getElementById('authError');
                     authError.textContent = error.message;
                     authError.classList.remove('hidden');
                 });
@@ -365,7 +302,7 @@
 
         // Logout
         function logout() {
-            signOut(auth).then(() => {
+            auth.signOut().then(() => {
                 document.getElementById('authButton').classList.remove('hidden');
                 document.getElementById('logoutButton').classList.add('hidden');
             }).catch((error) => {
@@ -374,7 +311,7 @@
         }
 
         // Check Auth State
-        onAuthStateChanged(auth, (user) => {
+        auth.onAuthStateChanged((user) => {
             if (user) {
                 document.getElementById('authButton').classList.add('hidden');
                 document.getElementById('logoutButton').classList.remove('hidden');
