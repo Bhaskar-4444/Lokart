@@ -18,20 +18,69 @@
         h1, h2, h3 {
             font-family: 'Poppins', sans-serif;
         }
+        /* Search Bar Section */
+        .search-section {
+            background-color: #a7f3d0; /* Pea Green */
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 30;
+            transition: transform 0.3s ease-in-out;
+        }
+        .search-section.hidden {
+            transform: translateY(-100%);
+        }
+        .search-section .search-bar {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .search-section input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px 0 0 8px;
+            outline: none;
+            font-size: 1rem;
+        }
+        .search-section button {
+            padding: 12px 16px;
+            background: #f97316;
+            color: white;
+            border: none;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .search-section button:hover {
+            background: #e64a19;
+        }
+        /* Navbar */
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 20;
+        }
         /* Popup Overlay */
         .popup-overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
             background: rgba(0,0,0,0.5);
-            display: none; /* Hidden by default */
+            display: none;
             justify-content: center; align-items: center;
             z-index: 9999;
         }
         .popup-overlay.show {
             display: flex;
         }
-        /* Popup card */
         .popup {
             background: #fff;
             border-radius: 16px;
@@ -42,7 +91,6 @@
             box-shadow: 0 5px 25px rgba(0,0,0,0.2);
             font-family: Arial, sans-serif;
         }
-        /* Close button */
         .popup .close-btn {
             position: absolute;
             top: 12px; right: 12px;
@@ -52,25 +100,21 @@
             color: #555;
             cursor: pointer;
         }
-        /* Icon */
         .popup .phone-icon {
             font-size: 48px;
             color: #ff5722;
             margin-bottom: 10px;
         }
-        /* Title */
         .popup h2 {
             margin: 0 0 8px;
             font-size: 18px;
             font-weight: bold;
         }
-        /* Subtitle */
         .popup p {
             font-size: 14px;
             color: #777;
             margin-bottom: 15px;
         }
-        /* Input */
         .popup input {
             width: 100%;
             padding: 12px;
@@ -79,7 +123,6 @@
             border: 1px solid #ccc;
             font-size: 14px;
         }
-        /* Button */
         .popup button {
             width: 100%;
             padding: 12px;
@@ -93,7 +136,6 @@
         .popup button:hover {
             background: #e64a19;
         }
-        /* Explore link */
         .explore-link {
             display: block;
             margin-top: 12px;
@@ -101,20 +143,6 @@
             color: #555;
             text-decoration: underline;
             cursor: pointer;
-        }
-        /* Active Section Indicator */
-        .active-section {
-            background: #f97316;
-            color: white;
-            padding: 10px 0;
-            text-align: center;
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 600;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 20;
         }
         /* Half Dimension Sections */
         .half-section {
@@ -149,11 +177,16 @@
     </style>
 </head>
 <body class="bg-gray-100 font-sans">
-    <!-- Active Section Indicator -->
-    <div id="activeSection" class="active-section">Home</div>
+    <!-- Search Section -->
+    <div class="search-section" id="searchSection">
+        <div class="search-bar">
+            <input type="text" placeholder="Search the products" id="searchInput">
+            <button>Search</button>
+        </div>
+    </div>
 
     <!-- Navbar -->
-    <nav class="bg-white shadow-lg fixed w-full z-10" style="top: 40px;">
+    <nav class="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
@@ -164,7 +197,7 @@
                     <a href="#services" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Product</a>
                     <a href="#about" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">About</a>
                     <a href="#contact" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
-                    <a href="cart.html" class="text-gray-7 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Your Cart</a>
+                    <a href="cart.html" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Your Cart</a>
                     <button id="authButton" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium" onclick="toggleAuthModal()">Login</button>
                     <button id="logoutButton" class="hidden text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium" onclick="logout()">Logout</button>
                 </div>
@@ -381,23 +414,18 @@
 
             sections.forEach(section => observer.observe(section));
 
-            // Active section indicator
-            const navSections = document.querySelectorAll('section[id]');
-            const activeSectionIndicator = document.getElementById('activeSection');
+            // Scroll event to hide search section
+            const searchSection = document.getElementById('searchSection');
+            let lastScrollY = window.scrollY;
 
-            const updateActiveSection = () => {
-                let currentSection = 'Home';
-                navSections.forEach(section => {
-                    const rect = section.getBoundingClientRect();
-                    if (rect.top <= 100 && rect.bottom >= 100) {
-                        currentSection = section.querySelector('h2')?.textContent || section.id.charAt(0).toUpperCase() + section.id.slice(1);
-                    }
-                });
-                activeSectionIndicator.textContent = currentSection;
-            };
-
-            window.addEventListener('scroll', updateActiveSection);
-            updateActiveSection();
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > lastScrollY && window.scrollY > 50) {
+                    searchSection.classList.add('hidden');
+                } else if (window.scrollY < lastScrollY) {
+                    searchSection.classList.remove('hidden');
+                }
+                lastScrollY = window.scrollY;
+            });
         };
 
         // Toggle Authentication Popup
