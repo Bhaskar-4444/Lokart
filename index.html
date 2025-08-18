@@ -102,11 +102,58 @@
             text-decoration: underline;
             cursor: pointer;
         }
+        /* Active Section Indicator */
+        .active-section {
+            background: #f97316;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 20;
+        }
+        /* Half Dimension Sections */
+        .half-section {
+            height: 50vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .half-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .section-1 {
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1607532941433-304659e8198a?auto=format&fit=crop&w=800');
+            border: 4px solid #f97316;
+        }
+        .section-2 {
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1615484477201-7f12cd6f6f16?auto=format&fit=crop&w=800');
+            border: 4px solid #10b981;
+        }
+        .section-3 {
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1590779033106-b1ca0a4c1d3d?auto=format&fit=crop&w=800');
+            border: 4px solid #3b82f6;
+        }
     </style>
 </head>
 <body class="bg-gray-100 font-sans">
+    <!-- Active Section Indicator -->
+    <div id="activeSection" class="active-section">Home</div>
+
     <!-- Navbar -->
-    <nav class="bg-white shadow-lg fixed w-full z-10">
+    <nav class="bg-white shadow-lg fixed w-full z-10" style="top: 40px;">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
@@ -117,7 +164,7 @@
                     <a href="#services" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Product</a>
                     <a href="#about" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">About</a>
                     <a href="#contact" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
-                    <a href="cart.html" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Your Cart</a>
+                    <a href="cart.html" class="text-gray-7 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Your Cart</a>
                     <button id="authButton" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium" onclick="toggleAuthModal()">Login</button>
                     <button id="logoutButton" class="hidden text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium" onclick="logout()">Logout</button>
                 </div>
@@ -149,10 +196,24 @@
     </div>
 
     <!-- Hero Section -->
-    <section id="home" class="bg-gradient-to-r from-orange-400 to-green-500 text-white py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Welcome to Vegras</h1>
-            <p class="text-lg md:text-xl mb-6">Empowering every kitchen with trust, quality, and value</p>
+    <section id="home" class="pt-20">
+        <div class="half-section section-1">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Fresh Vegetables</h1>
+                <p class="text-lg md:text-xl mb-6">Discover our range of organic, farm-fresh vegetables.</p>
+            </div>
+        </div>
+        <div class="half-section section-2">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Quality Greens</h1>
+                <p class="text-lg md:text-xl mb-6">Handpicked greens for your healthy lifestyle.</p>
+            </div>
+        </div>
+        <div class="half-section section-3">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Seasonal Picks</h1>
+                <p class="text-lg md:text-xl mb-6">Explore seasonal vegetables for vibrant flavors.</p>
+            </div>
         </div>
     </section>
 
@@ -307,6 +368,36 @@
                 size: 'normal',
                 callback: () => console.log("reCAPTCHA verified")
             });
+
+            // Intersection Observer for scroll animations
+            const sections = document.querySelectorAll('.half-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            sections.forEach(section => observer.observe(section));
+
+            // Active section indicator
+            const navSections = document.querySelectorAll('section[id]');
+            const activeSectionIndicator = document.getElementById('activeSection');
+
+            const updateActiveSection = () => {
+                let currentSection = 'Home';
+                navSections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= 100 && rect.bottom >= 100) {
+                        currentSection = section.querySelector('h2')?.textContent || section.id.charAt(0).toUpperCase() + section.id.slice(1);
+                    }
+                });
+                activeSectionIndicator.textContent = currentSection;
+            };
+
+            window.addEventListener('scroll', updateActiveSection);
+            updateActiveSection();
         };
 
         // Toggle Authentication Popup
