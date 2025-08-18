@@ -64,9 +64,14 @@
         .navbar {
             background: white;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
+            position: fixed;
+            top: 64px; /* Adjusted to account for search section height */
+            width: 100%;
             z-index: 20;
+            transition: top 0.3s ease-in-out;
+        }
+        .navbar.sticky {
+            top: 0;
         }
         /* Popup Overlay */
         .popup-overlay {
@@ -186,7 +191,7 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
@@ -229,7 +234,7 @@
     </div>
 
     <!-- Hero Section -->
-    <section id="home" class="pt-20">
+    <section id="home" class="pt-32"> <!-- Adjusted padding to account for search and navbar -->
         <div class="half-section section-1">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h1 class="text-4xl md:text-5xl font-bold mb-4">Fresh Vegetables</h1>
@@ -414,15 +419,18 @@
 
             sections.forEach(section => observer.observe(section));
 
-            // Scroll event to hide search section
+            // Scroll event to manage search section and navbar
             const searchSection = document.getElementById('searchSection');
+            const navbar = document.getElementById('navbar');
             let lastScrollY = window.scrollY;
 
             window.addEventListener('scroll', () => {
                 if (window.scrollY > lastScrollY && window.scrollY > 50) {
                     searchSection.classList.add('hidden');
-                } else if (window.scrollY < lastScrollY) {
+                    navbar.classList.add('sticky');
+                } else if (window.scrollY <= 50) {
                     searchSection.classList.remove('hidden');
+                    navbar.classList.remove('sticky');
                 }
                 lastScrollY = window.scrollY;
             });
