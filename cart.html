@@ -17,35 +17,74 @@
         h1, h2, h3 {
             font-family: 'Poppins', sans-serif;
         }
-        #authModal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            align-items: center;
-            justify-content: center;
-            z-index: 20;
-        }
-        #authModal.show {
-            display: flex;
-        }
-        #authForm {
-            background: white;
-            padding: 2rem;
+        /* Enhanced Table Styling */
+        .cart-table {
+            border-collapse: separate;
+            border-spacing: 0;
             border-radius: 8px;
-            width: 100%;
-            max-width: 400px;
-            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        #closeModal {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-            font-size: 1.5rem;
+        .cart-table th {
+            background: #f97316;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .cart-table td, .cart-table th {
+            padding: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .cart-table tr:last-child td {
+            border-bottom: none;
+        }
+        .cart-table tr:hover {
+            background-color: #f9fafb;
+        }
+        /* Button Container */
+        .button-container {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 24px;
+        }
+        /* Professional Button Styling */
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .btn-clear {
+            background: #ef4444;
+            color: white;
+        }
+        .btn-clear:hover {
+            background: #dc2626;
+        }
+        .btn-place {
+            background: #10b981;
+            color: white;
+        }
+        .btn-place:hover {
+            background: #059669;
+        }
+        /* Success Message */
+        .success-message {
+            display: none;
+            margin-top: 16px;
+            padding: 12px;
+            background: #d1fae5;
+            color: #065f46;
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+        }
+        .success-message.show {
+            display: block;
         }
     </style>
 </head>
@@ -63,47 +102,23 @@
                     <a href="index.html#services" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Services</a>
                     <a href="index.html#contact" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
                     <a href="cart.html" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Your Cart</a>
-                    <button id="authButton" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium" onclick="toggleAuthModal()">Login</button>
-                    <button id="logoutButton" class="hidden text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium" onclick="logout()">Logout</button>
                 </div>
             </div>
         </div>
     </nav>
-
-    <!-- Authentication Modal -->
-    <div id="authModal">
-        <div id="authForm" class="shadow-lg">
-            <span id="closeModal" onclick="toggleAuthModal()">&times;</span>
-            <h2 id="authTitle" class="text-2xl font-bold text-center mb-4">Login</h2>
-            <div class="mb-4">
-                <label for="email" class="block text-gray-700">Email</label>
-                <input type="email" id="email" class="w-full px-3 py-2 border rounded-md">
-            </div>
-            <div class="mb-4">
-                <label for="password" class="block text-gray-700">Password</label>
-                <input type="password" id="password" class="w-full px-3 py-2 border rounded-md">
-            </div>
-            <button id="authSubmit" class="w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600" onclick="handleAuth()">Login</button>
-            <button class="w-full mt-2 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600" onclick="signInWithGoogle()">Sign in with Google</button>
-            <p class="mt-4 text-center text-gray-600">
-                <a href="#" id="toggleAuthMode" class="text-orange-500 hover:underline" onclick="toggleAuthMode()">Create an account</a>
-            </p>
-            <p id="authError" class="text-red-500 text-center mt-2 hidden"></p>
-        </div>
-    </div>
 
     <!-- Cart Section -->
     <section id="cart" class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">Your Cart</h2>
             <div id="cartItems" class="overflow-x-auto">
-                <table class="min-w-full bg-white border rounded-lg">
+                <table class="min-w-full bg-white cart-table">
                     <thead>
-                        <tr class="bg-gray-100">
-                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-900">Hindi Name</th>
-                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-900">English Name</th>
-                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-900">Details</th>
-                            <th class="px-6 py-3 text-center text-sm font-medium text-gray-900">Quantity (in kg)</th>
+                        <tr>
+                            <th class="px-6 py-3 text-left text-sm font-medium">Hindi Name</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium">English Name</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium">Details</th>
+                            <th class="px-6 py-3 text-center text-sm font-medium">Quantity (in kg)</th>
                         </tr>
                     </thead>
                     <tbody id="cartTableBody">
@@ -111,9 +126,11 @@
                     </tbody>
                 </table>
             </div>
-            <div class="text-center mt-8">
-                <button class="bg-orange-500 text-white py-2 px-6 rounded-md hover:bg-orange-600" onclick="clearCart()">Clear Cart</button>
+            <div class="button-container">
+                <button class="btn btn-clear" onclick="clearCart()">Clear Cart</button>
+                <button class="btn btn-place" onclick="placeOrder()">Place Order</button>
             </div>
+            <div id="successMessage" class="success-message">Order placed successfully!</div>
         </div>
     </section>
 
@@ -121,109 +138,13 @@
     <footer class="bg-gray-900 text-white py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col items-center">
-                <div class="logo mb-4">vegras</div>
+                <div class="logo mb-4">Vegras</div>
                 <p class="text-gray-400 text-center">© 2025 Suprova. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyAAlsMvIBJf5N39wjckLszxvC5m_bpnINc",
-            authDomain: "lokart-2dc3c.firebaseapp.com",
-            databaseURL: "https://lokart-2dc3c-default-rtdb.firebaseio.com",
-            projectId: "lokart-2dc3c",
-            storageBucket: "lokart-2dc3c.firebasestorage.app",
-            messagingSenderId: "174715257453",
-            appId: "1:174715257453:web:be4b91210aa1771f587564",
-            measurementId: "G-NGHHKZHCV5"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const auth = getAuth(app);
-        const provider = new GoogleAuthProvider();
-
-        onAuthStateChanged(auth, (user) => {
-            const authButton = document.getElementById('authButton');
-            const logoutButton = document.getElementById('logoutButton');
-            if (user) {
-                authButton.classList.add('hidden');
-                logoutButton.classList.remove('hidden');
-            } else {
-                authButton.classList.remove('hidden');
-                logoutButton.classList.add('hidden');
-            }
-        });
-
-        window.toggleAuthModal = function() {
-            const modal = document.getElementById('authModal');
-            modal.classList.toggle('show');
-            if (!modal.classList.contains('show')) {
-                resetForm();
-            }
-        };
-
-        let isLoginMode = true;
-        window.toggleAuthMode = function() {
-            isLoginMode = !isLoginMode;
-            const authTitle = document.getElementById('authTitle');
-            const authSubmit = document.getElementById('authSubmit');
-            const toggleAuthMode = document.getElementById('toggleAuthMode');
-            authTitle.textContent = isLoginMode ? 'Login' : 'Sign Up';
-            authSubmit.textContent = isLoginMode ? 'Login' : 'Sign Up';
-            toggleAuthMode.textContent = isLoginMode ? 'Create an account' : 'Already have an account? Login';
-            resetForm();
-        };
-
-        function resetForm() {
-            document.getElementById('email').value = '';
-            document.getElementById('password').value = '';
-            document.getElementById('authError').classList.add('hidden');
-            document.getElementById('authError').textContent = '';
-        }
-
-        window.handleAuth = async function() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const authError = document.getElementById('authError');
-
-            try {
-                if (isLoginMode) {
-                    await signInWithEmailAndPassword(auth, email, password);
-                } else {
-                    await createUserWithEmailAndPassword(auth, email, password);
-                }
-                toggleAuthModal();
-            } catch (error) {
-                authError.classList.remove('hidden');
-                authError.textContent = error.message;
-            }
-        };
-
-        window.signInWithGoogle = async function() {
-            try {
-                await signInWithPopup(auth, provider);
-                toggleAuthModal();
-            } catch (error) {
-                const authError = document.getElementById('authError');
-                authError.classList.remove('hidden');
-                authError.textContent = error.message;
-            }
-        };
-
-        window.logout = async function() {
-            try {
-                await signOut(auth);
-            } catch (error) {
-                console.error('Logout error:', error);
-            }
-        };
-
+    <script>
         // Load cart items
         window.onload = function() {
             const cart = JSON.parse(localStorage.getItem('cart') || '{}');
@@ -239,10 +160,10 @@
                 const item = cart[itemId];
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td class="px-6 py-4 border-b">${item.hindi}</td>
-                    <td class="px-6 py-4 border-b">${item.english}</td>
-                    <td class="px-6 py-4 border-b">${item.details || '-'}</td>
-                    <td class="px-6 py-4 border-b text-center">${item.quantity}</td>
+                    <td class="px-6 py-4">${item.hindi}</td>
+                    <td class="px-6 py-4">${item.english}</td>
+                    <td class="px-6 py-4">${item.details || '-'}</td>
+                    <td class="px-6 py-4 text-center">${item.quantity}</td>
                 `;
                 cartTableBody.appendChild(row);
             }
@@ -252,7 +173,23 @@
         window.clearCart = function() {
             localStorage.removeItem('cart');
             document.getElementById('cartTableBody').innerHTML = '<tr><td colspan="4" class="px-6 py-4 text-center text-gray-600">Your cart is empty.</td></tr>';
+            document.getElementById('successMessage').classList.remove('show');
             alert('Cart cleared successfully!');
+        };
+
+        // Place order function
+        window.placeOrder = function() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '{}');
+            if (Object.keys(cart).length === 0) {
+                alert('Your cart is empty. Please add items before placing an order.');
+                return;
+            }
+            document.getElementById('successMessage').classList.add('show');
+            localStorage.removeItem('cart');
+            document.getElementById('cartTableBody').innerHTML = '<tr><td colspan="4" class="px-6 py-4 text-center text-gray-600">Your cart is empty.</td></tr>';
+            setTimeout(() => {
+                document.getElementById('successMessage').classList.remove('show');
+            }, 3000); // Hide success message after 3 seconds
         };
     </script>
 </body>
