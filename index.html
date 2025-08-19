@@ -6,150 +6,30 @@
     <title>Vegras - Your Online Grocery Store</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css"/>
     <style>
         .logo {
             font-family: 'Poppins', sans-serif;
             font-weight: 700;
             font-size: 2rem;
+            color: #f97316;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-            background: linear-gradient(to right, #f97316 50%, #a7f3d0 50%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
         h1, h2, h3 {
             font-family: 'Poppins', sans-serif;
         }
-        /* Search Bar Section */
-        .search-section {
-            background-color: #a7f3d0; /* Pea Green */
-            padding: 1rem 0;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 30;
-            transition: transform 0.3s ease-in-out;
-        }
-        .search-section.hidden {
-            transform: translateY(-100%);
-        }
-        .search-section .search-bar {
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .search-section input {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 8px 0 0 8px;
-            outline: none;
-            font-size: 1rem;
-        }
-        .search-section button {
-            padding: 12px 16px;
+        /* Active Section Indicator */
+        .active-section {
             background: #f97316;
             color: white;
-            border: none;
-            border-radius: 0 8px 8px 0;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-        .search-section button:hover {
-            background: #e64a19;
-        }
-        /* Navbar */
-        .navbar {
-            background: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
             position: fixed;
-            top: 64px;
+            top: 0;
             width: 100%;
             z-index: 20;
-            transition: top 0.3s ease-in-out;
-        }
-        .navbar.sticky {
-            top: 0;
-        }
-        /* Popup Overlay */
-        .popup-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
-            display: none;
-            justify-content: center; align-items: center;
-            z-index: 9999;
-        }
-        .popup-overlay.show {
-            display: flex;
-        }
-        .popup {
-            background: #fff;
-            border-radius: 16px;
-            padding: 24px 20px;
-            width: 340px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
-            font-family: Arial, sans-serif;
-        }
-        .popup .close-btn {
-            position: absolute;
-            top: 12px; right: 12px;
-            background: none;
-            border: none;
-            font-size: 20px;
-            color: #555;
-            cursor: pointer;
-        }
-        .popup .phone-icon {
-            font-size: 48px;
-            color: #ff5722;
-            margin-bottom: 10px;
-        }
-        .popup h2 {
-            margin: 0 0 8px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .popup p {
-            font-size: 14px;
-            color: #777;
-            margin-bottom: 15px;
-        }
-        .popup input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 12px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            font-size: 14px;
-        }
-        .popup button {
-            width: 100%;
-            padding: 12px;
-            background: #ff5722;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 15px;
-        }
-        .popup button:hover {
-            background: #e64a19;
-        }
-        .explore-link {
-            display: block;
-            margin-top: 12px;
-            font-size: 13px;
-            color: #555;
-            text-decoration: underline;
-            cursor: pointer;
         }
         /* Half Dimension Sections */
         .half-section {
@@ -181,23 +61,14 @@
             background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1590779033106-b1ca0a4c1d3d?auto=format&fit=crop&w=800');
             border: 4px solid #3b82f6;
         }
-        /* Product Card Hidden */
-        .product-card.hidden {
-            display: none;
-        }
     </style>
 </head>
 <body class="bg-gray-100 font-sans">
-    <!-- Search Section -->
-    <div class="search-section" id="searchSection">
-        <div class="search-bar">
-            <input type="text" placeholder="Search the products" id="searchInput">
-            <button onclick="searchProducts()">Search</button>
-        </div>
-    </div>
+    <!-- Active Section Indicator -->
+    <div id="activeSection" class="active-section">Home</div>
 
     <!-- Navbar -->
-    <nav class="navbar" id="navbar">
+    <nav class="bg-white shadow-lg fixed w-full z-10" style="top: 40px;">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
@@ -209,13 +80,13 @@
                     <a href="#about" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">About</a>
                     <a href="#contact" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
                     <a href="cart.html" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Your Cart</a>
-                   
                 </div>
             </div>
         </div>
     </nav>
+
     <!-- Hero Section -->
-    <section id="home" class="pt-32">
+    <section id="home" class="pt-20">
         <div class="half-section section-1">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h1 class="text-4xl md:text-5xl font-bold mb-4">Fresh Vegetables</h1>
@@ -240,36 +111,36 @@
     <section id="services" class="py-16 bg-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">Our Products</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="productGrid">
-                <a href="vegetarian.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow product-card">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <a href="vegetarian.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Vegetarian Items 🌿</h3>
                     <p class="text-gray-600">Explore our range of fresh, plant-based dishes crafted with organic ingredients.</p>
                 </a>
-                <a href="non_vegetarian.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow product-card">
+                <a href="non_vegetarian.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Non-Vegetarian Items 🍗</h3>
                     <p class="text-gray-600">Premium quality meat and seafood sourced sustainably for your dining pleasure.</p>
                 </a>
-                <a href="dairy_products.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow product-card">
+                <a href="dairy_products.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Dairy Products 🧀</h3>
                     <p class="text-gray-600">Fresh and high-quality dairy products for your daily needs.</p>
                 </a>
-                <a href="spices_masalas.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow product-card">
+                <a href="spices_masalas.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Spices & Masalas 🧂</h3>
                     <p class="text-gray-600">Authentic spices and masalas to elevate your culinary creations.</p>
                 </a>
-                <a href="oils_fats.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow product-card">
+                <a href="oils_fats.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Oils & Fats 🍪</h3>
                     <p class="text-gray-600">Pure and healthy oils and fats for cooking and baking.</p>
                 </a>
-                <a href="snacks_dry_items.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow product-card">
+                <a href="snacks_dry_items.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Snacks & Dry Items 🍬</h3>
                     <p class="text-gray-600">Premium quality snacks, grains, and pulses for your pantry.</p>
                 </a>
-                <a href="sweeteners_baking.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow product-card">
+                <a href="sweeteners_baking.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Sweeteners & Baking 🍰</h3>
                     <p class="text-gray-600">High-quality sweeteners and baking essentials for delicious treats.</p>
                 </a>
-                <a href="write_order.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow product-card">
+                <a href="write_order.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Write Your Order / अपना ऑर्डर लिखें ✍️</h3>
                     <p class="text-gray-600">Custom orders? Write or speak your requirements, and we'll fulfill them!</p>
                 </a>
@@ -345,8 +216,39 @@
             </div>
         </div>
     </footer>
-            });
-        
+
+    <script>
+        // Intersection Observer for scroll animations
+        window.onload = () => {
+            const sections = document.querySelectorAll('.half-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            sections.forEach(section => observer.observe(section));
+
+            // Active section indicator
+            const navSections = document.querySelectorAll('section[id]');
+            const activeSectionIndicator = document.getElementById('activeSection');
+
+            const updateActiveSection = () => {
+                let currentSection = 'Home';
+                navSections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= 100 && rect.bottom >= 100) {
+                        currentSection = section.querySelector('h2')?.textContent || section.id.charAt(0).toUpperCase() + section.id.slice(1);
+                    }
+                });
+                activeSectionIndicator.textContent = currentSection;
+            };
+
+            window.addEventListener('scroll', updateActiveSection);
+            updateActiveSection();
+        };
     </script>
 </body>
 </html>
