@@ -26,8 +26,8 @@
         }
         /* Active Section Indicator */
         .active-section {
-            background: linear-gradient(to right, #f97316, #ef4444);
-            color: white;
+            background: #d1fae5; /* Light green background */
+            color: #1f2937;
             padding: 12px 0;
             text-align: center;
             font-size: 1.25rem;
@@ -37,6 +37,39 @@
             width: 100%;
             z-index: 20;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .search-box {
+            margin-left: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .search-box input {
+            padding: 8px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            outline: none;
+            font-size: 0.9rem;
+            transition: border-color 0.3s ease;
+        }
+        .search-box input:focus {
+            border-color: #f97316;
+        }
+        .search-box button {
+            margin-left: 8px;
+            padding: 8px 16px;
+            background: #f97316;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+        .search-box button:hover {
+            background: #ef4444;
         }
         /* Half Dimension Sections */
         .half-section {
@@ -93,8 +126,14 @@
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
-    <!-- Active Section Indicator -->
-    <div id="activeSection" class="active-section">Home</div>
+    <!-- Active Section Indicator with Search Box -->
+    <div id="activeSection" class="active-section">
+        <span>Home</span>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search products or pages..." />
+            <button onclick="handleSearch()">Search</button>
+        </div>
+    </div>
 
     <!-- Navbar -->
     <nav class="bg-white shadow-md fixed w-full z-10" style="top: 48px;">
@@ -138,7 +177,7 @@
         </div>
     </section>
 
-    <!-- Products Section (Renamed from Services) -->
+    <!-- Products Section -->
     <section id="products" class="py-20 bg-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl font-bold text-gray-900 text-center mb-12">Our Products</h2>
@@ -191,7 +230,7 @@
         </div>
     </section>
 
-    <!-- New Blog Section -->
+    <!-- Blog Section -->
     <section id="blog" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl font-bold text-gray-900 text-center mb-12">Our Blog</h2>
@@ -215,7 +254,7 @@
         </div>
     </section>
 
-    <!-- New FAQ Section -->
+    <!-- FAQ Section -->
     <section id="faq" class="py-20 bg-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl font-bold text-gray-900 text-center mb-12">Frequently Asked Questions</h2>
@@ -255,7 +294,7 @@
                         </div>
                         <div class="flex items-center">
                             <svg class="w-6 h-6 text-orange-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                            <a href="tel:+919508331748" class="text-gray-600 hover:text-orange-500">+917050462102</a>
+                            <a href="tel:+917050462102" class="text-gray-600 hover:text-orange-500">+917050462102</a>
                         </div>
                         <div class="flex items-center">
                             <svg class="w-6 h-6 text-orange-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg>
@@ -366,12 +405,60 @@
                         currentSection = section.querySelector('h2')?.textContent || section.id.charAt(0).toUpperCase() + section.id.slice(1);
                     }
                 });
-                activeSectionIndicator.textContent = currentSection;
+                activeSectionIndicator.querySelector('span').textContent = currentSection;
             };
 
             window.addEventListener('scroll', updateActiveSection);
             updateActiveSection();
         };
+
+        // Search functionality
+        function handleSearch() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const pageMap = {
+                'home': '#home',
+                'products': '#products',
+                'blog': '#blog',
+                'faq': '#faq',
+                'about': '#about',
+                'contact': '#contact',
+                'cart': 'cart.html',
+                'vegetarian': 'vegetarian.html',
+                'non vegetarian': 'non_vegetarian.html',
+                'dairy': 'dairy_products.html',
+                'spices': 'spices_masalas.html',
+                'oils': 'oils_fats.html',
+                'snacks': 'snacks_dry_items.html',
+                'sweeteners': 'sweeteners_baking.html',
+                'fruits': 'fruits.html',
+                'beverages': 'beverages.html',
+                'household': 'household_essentials.html',
+                'order': 'write_order.html',
+                'organic benefits': 'blog/organic-benefits.html',
+                'seasonal guide': 'blog/seasonal-guide.html',
+                'recipes': 'blog/healthy-recipes.html',
+                'privacy': 'privacy-policy.html',
+                'terms': 'terms-of-service.html',
+                'shipping': 'shipping-info.html',
+                'returns': 'returns.html',
+                'careers': 'careers.html'
+            };
+
+            for (const [key, url] of Object.entries(pageMap)) {
+                if (searchInput.includes(key)) {
+                    window.location.href = url;
+                    return;
+                }
+            }
+            alert('Page not found. Please try another search term.');
+        }
+
+        // Allow pressing Enter to trigger search
+        document.getElementById('searchInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                handleSearch();
+            }
+        });
     </script>
 </body>
 </html>
