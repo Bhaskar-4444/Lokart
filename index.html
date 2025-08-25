@@ -1,254 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vegras - Your Online Grocery Store</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
-    <style>
-        .logo {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 2rem;
-            color: #f97316;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-        }
-        h1, h2, h3 {
-            font-family: 'Poppins', sans-serif;
-        }
-        /* Active Section Indicator */
-        .active-section {
-            background: #f97316;
-            color: white;
-            padding: 10px 0;
-            text-align: center;
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 600;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 20;
-        }
-        /* Half Dimension Sections */
-        .half-section {
-            height: 50vh;
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .half-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .section-1 {
-            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1607532941433-304659e8198a?auto=format&fit=crop&w=800');
-            border: 4px solid #f97316;
-        }
-        .section-2 {
-            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1615484477201-7f12cd6f6f16?auto=format&fit=crop&w=800');
-            border: 4px solid #10b981;
-        }
-        .section-3 {
-            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1590779033106-b1ca0a4c1d3d?auto=format&fit=crop&w=800');
-            border: 4px solid #3b82f6;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vegras - Fresh Vegetables</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 font-sans">
-    <!-- Active Section Indicator -->
-    <div id="activeSection" class="active-section">Home</div>
+<body class="font-sans text-gray-800">
 
-    <!-- Navbar -->
-    <nav class="bg-white shadow-lg fixed w-full z-10" style="top: 40px;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <div class="logo">Vegras</div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <a href="#home" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                    <a href="#services" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Product</a>
-                    <a href="#about" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">About</a>
-                    <a href="#contact" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
-                    <a href="cart.html" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium">Your Cart</a>
-                </div>
-            </div>
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center py-4 px-6">
+      <h1 class="text-2xl font-bold text-green-600">Vegras</h1>
+      <ul class="flex space-x-6 font-medium">
+        <li><a href="#hero" class="hover:text-green-600">Home</a></li>
+        <li><a href="#services" class="hover:text-green-600">Products</a></li>
+        <li><a href="#about" class="hover:text-green-600">About</a></li>
+        <li><a href="#gallery" class="hover:text-green-600">Gallery</a></li>
+        <li><a href="#testimonials" class="hover:text-green-600">Testimonials</a></li>
+        <li><a href="#blog" class="hover:text-green-600">Blog</a></li>
+        <li><a href="#faq" class="hover:text-green-600">FAQ</a></li>
+        <li><a href="#contact" class="hover:text-green-600">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="h-screen bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1506806732259-39c2d0268443');">
+    <div class="absolute inset-0 bg-black/40"></div>
+    <div class="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-6">
+      <h1 class="text-5xl md:text-6xl font-bold mb-4">Fresh Vegetables Everyday</h1>
+      <p class="text-xl md:text-2xl mb-6">Healthy, Organic, and Delivered to Your Doorstep</p>
+      <a href="#services" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg shadow-md font-semibold transition">Shop Now</a>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section id="services" class="py-16 bg-gray-50">
+    <div class="container mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-8">Our Products</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition">
+          <img src="https://images.unsplash.com/photo-1606756790138-19644fcaad36" alt="Tomatoes" class="h-40 w-full object-cover rounded-md mb-4">
+          <h3 class="text-2xl font-semibold">Tomatoes</h3>
+          <p class="mt-2 text-gray-600">Juicy, organic tomatoes picked fresh from the farm.</p>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="pt-20">
-        <div class="half-section section-1">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">Fresh Vegetables</h1>
-                <p class="text-lg md:text-xl mb-6">Discover our range of organic, farm-fresh vegetables.</p>
-            </div>
+        <div class="p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition">
+          <img src="https://images.unsplash.com/photo-1582515073490-dc98e1f0a3aa" alt="Carrots" class="h-40 w-full object-cover rounded-md mb-4">
+          <h3 class="text-2xl font-semibold">Carrots</h3>
+          <p class="mt-2 text-gray-600">Crunchy, sweet carrots rich in nutrients and flavor.</p>
         </div>
-        <div class="half-section section-2">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">Quality Greens</h1>
-                <p class="text-lg md:text-xl mb-6">Handpicked greens for your healthy lifestyle.</p>
-            </div>
+        <div class="p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition">
+          <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2" alt="Lettuce" class="h-40 w-full object-cover rounded-md mb-4">
+          <h3 class="text-2xl font-semibold">Lettuce</h3>
+          <p class="mt-2 text-gray-600">Fresh green lettuce, perfect for salads and wraps.</p>
         </div>
-        <div class="half-section section-3">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">Seasonal Picks</h1>
-                <p class="text-lg md:text-xl mb-6">Explore seasonal vegetables for vibrant flavors.</p>
-            </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-16">
+    <div class="container mx-auto grid md:grid-cols-2 gap-12 items-center px-6">
+      <img src="https://images.unsplash.com/photo-1587049352847-4a218f4f9b59" alt="Farm" class="rounded-xl shadow-md">
+      <div>
+        <h2 class="text-4xl font-bold mb-4">About Vegras</h2>
+        <p class="text-lg text-gray-600">At Vegras, we are dedicated to bringing the freshest and healthiest vegetables to your table. Our produce is sourced directly from local farms, ensuring quality and sustainability.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="py-16 bg-gray-50">
+    <div class="container mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-8">Gallery</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6" class="rounded-xl shadow-md hover:scale-105 transition">
+        <img src="https://images.unsplash.com/photo-1506806732259-39c2d0268443" class="rounded-xl shadow-md hover:scale-105 transition">
+        <img src="https://images.unsplash.com/photo-1602526217544-09c62edab2a8" class="rounded-xl shadow-md hover:scale-105 transition">
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="py-16">
+    <div class="container mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-8">What Our Customers Say</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="p-6 bg-green-50 rounded-xl shadow-md">
+          <p class="italic">"The vegetables are always fresh and delivery is super fast. Highly recommend Vegras!"</p>
+          <h3 class="mt-4 font-bold">– Priya Sharma</h3>
         </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-16 bg-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">Our Products</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <a href="vegetarian.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Vegetarian Items 🌿</h3>
-                    <p class="text-gray-600">Explore our range of fresh, plant-based dishes crafted with organic ingredients.</p>
-                </a>
-                <a href="non_vegetarian.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Non-Vegetarian Items 🍗</h3>
-                    <p class="text-gray-600">Premium quality meat and seafood sourced sustainably for your dining pleasure.</p>
-                </a>
-                <a href="dairy_products.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Dairy Products 🧀</h3>
-                    <p class="text-gray-600">Fresh and high-quality dairy products for your daily needs.</p>
-                </a>
-                <a href="spices_masalas.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Spices & Masalas 🧂</h3>
-                    <p class="text-gray-600">Authentic spices and masalas to elevate your culinary creations.</p>
-                </a>
-                <a href="oils_fats.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Oils & Fats 🍪</h3>
-                    <p class="text-gray-600">Pure and healthy oils and fats for cooking and baking.</p>
-                </a>
-                <a href="snacks_dry_items.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Snacks & Dry Items 🍬</h3>
-                    <p class="text-gray-600">Premium quality snacks, grains, and pulses for your pantry.</p>
-                </a>
-                <a href="sweeteners_baking.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Sweeteners & Baking 🍰</h3>
-                    <p class="text-gray-600">High-quality sweeteners and baking essentials for delicious treats.</p>
-                </a>
-                <a href="write_order.html" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Write Your Order / अपना ऑर्डर लिखें ✍️</h3>
-                    <p class="text-gray-600">Custom orders? Write or speak your requirements, and we'll fulfill them!</p>
-                </a>
-            </div>
+        <div class="p-6 bg-green-50 rounded-xl shadow-md">
+          <p class="italic">"Best organic veggies I’ve ever had. The taste is amazing and prices are fair."</p>
+          <h3 class="mt-4 font-bold">– Rahul Verma</h3>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-gradient-to-r from-orange-50 to-green-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-4xl font-bold text-gray-900 text-center mb-8">Get in Touch</h2>
-            <p class="text-lg text-gray-600 text-center mb-12">We’re here to assist you! Reach out to us through any of the channels below or explore our delivery locations.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-6">Contact Information</h3>
-                    <div class="space-y-4">
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 text-orange-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                            <a href="mailto:hariom.556879@gmail.com" class="text-gray-600 hover:text-orange-500">hariom.556879@gmail.com</a>
-                        </div>
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 text-orange-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                            <a href="tel:+919508331748" class="text-gray-600 hover:text-orange-500">+917050462102</a>
-                        </div>
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 text-orange-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l4-4h4a1.994 1.994 0 001.414-.586m0 0"></path></svg>
-                            <a href="https://wa.me/919508331748" target="_blank" class="text-gray-600 hover:text-orange-500">+91-9508331748 (WhatsApp)</a>
-                        </div>
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 text-orange-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            <span class="text-gray-600">New Delhi (Delivery Available)</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-6">Customer Service & Locations</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <h4 class="text-lg font-semibold text-gray-900">Customer Service</h4>
-                            <p class="text-gray-600">Our team is available 24/7 to assist you with orders, deliveries, or any queries. Reach out via email, phone, or WhatsApp.</p>
-                        </div>
-                        <div>
-                            <h4 class="text-lg font-semibold text-gray-900">Delivery Locations</h4>
-                            <p class="text-gray-600">Currently delivering across New Delhi. Check out our upcoming locations in the NCR region!</p>
-                            <a href="coming-soon.html" class="inline-block mt-2 bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600">View Upcoming Locations</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <!-- Blog Section -->
+  <section id="blog" class="py-16 bg-gray-50">
+    <div class="container mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-8">Latest from Our Blog</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="p-6 bg-white rounded-xl shadow-md">
+          <h3 class="text-2xl font-semibold mb-2">5 Benefits of Eating Organic</h3>
+          <p class="text-gray-600">Discover why organic vegetables are healthier and tastier...</p>
         </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">About Us</h2>
-            <p class="text-gray-600 text-center">
-                At Vegras, we believe that great food starts with great ingredients.
-                We are a next-generation food and raw material supply brand, dedicated to serving restaurants, hotels, caterers, and food businesses with unmatched quality, timely delivery, and transparent pricing.
-                Our name stands for Supply, Professionalism, and Value — and that's exactly what we deliver. Whether it's fresh produce, pantry staples, or bulk essentials, we ensure your kitchen never stops.
-                We’re not just a supplier; we are your behind-the-scenes partner in every dish you serve.
-                Let’s grow together — one delivery at a time.
-            </p>
+        <div class="p-6 bg-white rounded-xl shadow-md">
+          <h3 class="text-2xl font-semibold mb-2">Farm-to-Table Journey</h3>
+          <p class="text-gray-600">Learn how we bring fresh veggies straight from farms to your plate...</p>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col items-center">
-                <div class="logo mb-4">Vegras</div>
-                <p class="text-gray-400 text-center">© 2025 Suprova. All rights reserved.</p>
-            </div>
+        <div class="p-6 bg-white rounded-xl shadow-md">
+          <h3 class="text-2xl font-semibold mb-2">Healthy Recipes</h3>
+          <p class="text-gray-600">Try these delicious recipes with our fresh produce...</p>
         </div>
-    </footer>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // Intersection Observer for scroll animations
-        window.onload = () => {
-            const sections = document.querySelectorAll('.half-section');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.3 });
+  <!-- FAQ Section -->
+  <section id="faq" class="py-16">
+    <div class="container mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-8">Frequently Asked Questions</h2>
+      <div class="max-w-2xl mx-auto text-left space-y-6">
+        <div>
+          <h3 class="font-semibold">Do you deliver in my area?</h3>
+          <p class="text-gray-600">We deliver across most major cities. Enter your pincode at checkout to confirm.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold">Are your vegetables organic?</h3>
+          <p class="text-gray-600">Yes, all our produce is organic and sourced from trusted farms.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold">How can I contact customer support?</h3>
+          <p class="text-gray-600">You can reach us via phone, email, or WhatsApp anytime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            sections.forEach(section => observer.observe(section));
+  <!-- Contact Section -->
+  <section id="contact" class="py-16 bg-green-50">
+    <div class="container mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-8">Get in Touch</h2>
+      <p class="text-lg mb-6">We’d love to hear from you. Contact us anytime!</p>
+      <div class="flex flex-col md:flex-row justify-center gap-8">
+        <div class="p-6 bg-white rounded-xl shadow-md">
+          <h3 class="font-semibold">📞 Phone</h3>
+          <p>+91 98765 43210</p>
+        </div>
+        <div class="p-6 bg-white rounded-xl shadow-md">
+          <h3 class="font-semibold">📧 Email</h3>
+          <p>support@vegras.com</p>
+        </div>
+        <div class="p-6 bg-white rounded-xl shadow-md">
+          <h3 class="font-semibold">📍 Address</h3>
+          <p>123 Green Street, Mumbai, India</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            // Active section indicator
-            const navSections = document.querySelectorAll('section[id]');
-            const activeSectionIndicator = document.getElementById('activeSection');
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-300 py-10">
+    <div class="container mx-auto grid md:grid-cols-4 gap-8 px-6">
+      <div>
+        <h3 class="text-xl font-bold text-white mb-4">Vegras</h3>
+        <p>Fresh, organic vegetables delivered to your home with love and care.</p>
+      </div>
+      <div>
+        <h3 class="font-bold text-white mb-4">Quick Links</h3>
+        <ul class="space-y-2">
+          <li><a href="#hero" class="hover:text-green-400">Home</a></li>
+          <li><a href="#services" class="hover:text-green-400">Products</a></li>
+          <li><a href="#about" class="hover:text-green-400">About</a></li>
+          <li><a href="#gallery" class="hover:text-green-400">Gallery</a></li>
+          <li><a href="#contact" class="hover:text-green-400">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-bold text-white mb-4">Contact Info</h3>
+        <p>📞 +91 98765 43210</p>
+        <p>📧 support@vegras.com</p>
+        <p>📍 Mumbai, India</p>
+      </div>
+      <div>
+        <h3 class="font-bold text-white mb-4">Newsletter</h3>
+        <p class="mb-3">Subscribe for updates and offers.</p>
+        <input type="email" placeholder="Enter your email" class="w-full px-3 py-2 rounded-md mb-3 text-gray-900">
+        <button class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-md text-white w-full">Subscribe</button>
+      </div>
+    </div>
+    <div class="text-center mt-8 text-gray-500">© 2025 Vegras. All rights reserved.</div>
+  </footer>
 
-            const updateActiveSection = () => {
-                let currentSection = 'Home';
-                navSections.forEach(section => {
-                    const rect = section.getBoundingClientRect();
-                    if (rect.top <= 100 && rect.bottom >= 100) {
-                        currentSection = section.querySelector('h2')?.textContent || section.id.charAt(0).toUpperCase() + section.id.slice(1);
-                    }
-                });
-                activeSectionIndicator.textContent = currentSection;
-            };
-
-            window.addEventListener('scroll', updateActiveSection);
-            updateActiveSection();
-        };
-    </script>
 </body>
 </html>
