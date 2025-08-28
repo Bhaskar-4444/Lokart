@@ -108,9 +108,59 @@
             color: #f97316;
             transition: color 0.3s ease;
         }
+        /* Popup Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s ease;
+        }
+        .popup-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .popup-content {
+            background: white;
+            padding: 24px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            color: #f97316;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .popup-close:hover {
+            color: #e55e0d;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
+    <!-- Popup -->
+    <div id="popup" class="popup-overlay">
+        <div class="popup-content">
+            <span id="popup-close" class="popup-close">&times;</span>
+            <p class="text-lg text-gray-800 font-medium">For better experience please go for desktop mode</p>
+        </div>
+    </div>
+
     <!-- Navbar -->
     <nav class="bg-white shadow-md fixed w-full z-10" style="top: 0;">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -321,7 +371,7 @@
                         <span class="logo-green">Veg</span><span class="logo-saffron">ras</span>
                     </div>
                     <p class="text-gray-400 mb-4">Your trusted source for premium groceries and fresh produce.</p>
-                    <p class="text-gray-400">© 2025 Vegras. All rights reserved.</p>
+                    <p class="text-gray-400">© 2025 Suprova. All rights reserved.</p>
                 </div>
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
@@ -347,7 +397,7 @@
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Connect With Us</h4>
                     <ul class="space-y-2">
-                        <li><a href="mailto:hariom.556879@gmail.com" class="text-gray-400 hover:text-white">Email: help.vegras@gmail.com</a></li>
+                        <li><a href="mailto:hariom.556879@gmail.com" class="text-gray-400 hover:text-white">Email: hariom.556879@gmail.com</a></li>
                         <li><a href="tel:+917050462102" class="text-gray-400 hover:text-white">Phone: +917050462102</a></li>
                         <li><a href="https://wa.me/919508331748" target="_blank" class="text-gray-400 hover:text-white">WhatsApp: +91-9508331748</a></li>
                         <li><a href="https://www.facebook.com/vegras" target="_blank" class="text-gray-400 hover:text-white">Facebook</a></li>
@@ -372,6 +422,27 @@
             }, { threshold: 0.3 });
 
             sections.forEach(section => observer.observe(section));
+
+            // Popup logic
+            const popup = document.getElementById('popup');
+            const closePopup = document.getElementById('popup-close');
+
+            // Check if popup has been shown in this session
+            if (!sessionStorage.getItem('popupShown')) {
+                popup.classList.add('active');
+                sessionStorage.setItem('popupShown', 'true');
+            }
+
+            closePopup.addEventListener('click', () => {
+                popup.classList.remove('active');
+            });
+
+            // Optional: Close popup when clicking outside
+            popup.addEventListener('click', (e) => {
+                if (e.target === popup) {
+                    popup.classList.remove('active');
+                }
+            });
         };
     </script>
 </body>
