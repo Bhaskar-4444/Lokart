@@ -14,8 +14,40 @@
             font-family: 'Poppins', sans-serif;
             font-weight: 700;
             font-size: 2.25rem;
-            color: #f97316;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            display: inline-flex;
+            align-items: center;
+            position: relative;
+            padding: 4px 8px;
+            background: linear-gradient(45deg, #d1fae5 50%, #ffedd5 50%); /* Diagonal gradient from top-left to bottom-right */
+            border-radius: 4px;
+            transform: rotate(-2deg); /* Slight tilt for arrow-like effect */
+        }
+        .logo-green {
+            color: #10b981; /* Light green */
+        }
+        .logo-saffron {
+            color: #f97316; /* Saffron (orange) */
+        }
+        .logo::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-right: 8px solid #d1fae5; /* Arrowhead on left, matching green */
+        }
+        .logo::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-left: 8px solid #ffedd5; /* Arrow tail on right, matching saffron */
         }
         h1, h2, h3, h4 {
             font-family: 'Poppins', sans-serif;
@@ -23,53 +55,6 @@
         }
         p {
             font-weight: 300;
-        }
-        /* Active Section Indicator */
-        .active-section {
-            background: #d1fae5; /* Light green background */
-            color: #1f2937;
-            padding: 12px 0;
-            text-align: center;
-            font-size: 1.25rem;
-            font-weight: 600;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 20;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .search-box {
-            margin-left: 20px;
-            display: flex;
-            align-items: center;
-        }
-        .search-box input {
-            padding: 8px 12px;
-            border: 1px solid #e5e7eb;
-            border-radius: 4px;
-            outline: none;
-            font-size: 0.9rem;
-            transition: border-color 0.3s ease;
-        }
-        .search-box input:focus {
-            border-color: #f97316;
-        }
-        .search-box button {
-            margin-left: 8px;
-            padding: 8px 16px;
-            background: #f97316;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: background 0.3s ease;
-        }
-        .search-box button:hover {
-            background: #ef4444;
         }
         /* Half Dimension Sections */
         .half-section {
@@ -95,12 +80,12 @@
             border-radius: 8px;
         }
         .section-2 {
-            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1615484477201-7f12cd6f6f16?auto=format&fit=crop&w=1600');
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://th.bing.com/th/id/OIP.o6-FYVzAkMhHUPuHeqcoLgHaE8?w=286&h=191&c=7&r=0&o=5&dpr=1.3&pid=1.7');
             border: 4px solid #10b981;
             border-radius: 8px;
         }
         .section-3 {
-            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1590779033106-b1ca0a4c1d3d?auto=format&fit=crop&w=1600');
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://th.bing.com/th/id/OIP.GJci02lGL8OQq_xXnm3_zQHaDt?w=349&h=174&c=7&r=0&o=7&dpr=1.3&pid=1.7');
             border: 4px solid #3b82f6;
             border-radius: 8px;
         }
@@ -126,21 +111,14 @@
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
-    <!-- Active Section Indicator with Search Box -->
-    <div id="activeSection" class="active-section">
-        <span>Home</span>
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Search products or pages..." />
-            <button onclick="handleSearch()">Search</button>
-        </div>
-    </div>
-
     <!-- Navbar -->
-    <nav class="bg-white shadow-md fixed w-full z-10" style="top: 48px;">
+    <nav class="bg-white shadow-md fixed w-full z-10" style="top: 0;">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center">
-                    <div class="logo">Vegras</div>
+                    <h1 class="logo">
+                        <span class="logo-green">Veg</span><span class="logo-saffron">ras</span>
+                    </h1>
                 </div>
                 <div class="flex items-center space-x-6">
                     <a href="#home" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-base font-medium">Home</a>
@@ -156,22 +134,22 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="pt-28">
+    <section id="home" class="pt-20">
         <div class="half-section section-1">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h1 class="text-5xl md:text-6xl font-bold mb-4">Fresh Vegetables</h1>
+                <h2 class="text-5xl md:text-6xl font-bold mb-4">Fresh Vegetables</h2>
                 <p class="text-xl md:text-2xl mb-6">Discover our range of organic, farm-fresh vegetables delivered straight to your door.</p>
             </div>
         </div>
         <div class="half-section section-2">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h1 class="text-5xl md:text-6xl font-bold mb-4">Quality Greens</h1>
+                <h2 class="text-5xl md:text-6xl font-bold mb-4">Quality Greens</h2>
                 <p class="text-xl md:text-2xl mb-6">Handpicked greens for a healthy and sustainable lifestyle.</p>
             </div>
         </div>
         <div class="half-section section-3">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h1 class="text-5xl md:text-6xl font-bold mb-4">Seasonal Picks</h1>
+                <h2 class="text-5xl md:text-6xl font-bold mb-4">Seasonal Picks</h2>
                 <p class="text-xl md:text-2xl mb-6">Explore seasonal vegetables for vibrant flavors and nutrition.</p>
             </div>
         </div>
@@ -339,9 +317,11 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <div class="logo mb-4">Vegras</div>
+                    <div class="logo mb-4">
+                        <span class="logo-green">Veg</span><span class="logo-saffron">ras</span>
+                    </div>
                     <p class="text-gray-400 mb-4">Your trusted source for premium groceries and fresh produce.</p>
-                    <p class="text-gray-400">© 2025 Suprova. All rights reserved.</p>
+                    <p class="text-gray-400">© 2025 Vegras. All rights reserved.</p>
                 </div>
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
@@ -367,7 +347,7 @@
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Connect With Us</h4>
                     <ul class="space-y-2">
-                        <li><a href="mailto:hariom.556879@gmail.com" class="text-gray-400 hover:text-white">Email: hariom.556879@gmail.com</a></li>
+                        <li><a href="mailto:hariom.556879@gmail.com" class="text-gray-400 hover:text-white">Email: help.vegras@gmail.com</a></li>
                         <li><a href="tel:+917050462102" class="text-gray-400 hover:text-white">Phone: +917050462102</a></li>
                         <li><a href="https://wa.me/919508331748" target="_blank" class="text-gray-400 hover:text-white">WhatsApp: +91-9508331748</a></li>
                         <li><a href="https://www.facebook.com/vegras" target="_blank" class="text-gray-400 hover:text-white">Facebook</a></li>
@@ -392,73 +372,7 @@
             }, { threshold: 0.3 });
 
             sections.forEach(section => observer.observe(section));
-
-            // Active section indicator
-            const navSections = document.querySelectorAll('section[id]');
-            const activeSectionIndicator = document.getElementById('activeSection');
-
-            const updateActiveSection = () => {
-                let currentSection = 'Home';
-                navSections.forEach(section => {
-                    const rect = section.getBoundingClientRect();
-                    if (rect.top <= 100 && rect.bottom >= 100) {
-                        currentSection = section.querySelector('h2')?.textContent || section.id.charAt(0).toUpperCase() + section.id.slice(1);
-                    }
-                });
-                activeSectionIndicator.querySelector('span').textContent = currentSection;
-            };
-
-            window.addEventListener('scroll', updateActiveSection);
-            updateActiveSection();
         };
-
-        // Search functionality
-        function handleSearch() {
-            const searchInput = document.getElementById('searchInput').value.toLowerCase();
-            const pageMap = {
-                'home': '#home',
-                'products': '#products',
-                'blog': '#blog',
-                'faq': '#faq',
-                'about': '#about',
-                'contact': '#contact',
-                'cart': 'cart.html',
-                'vegetarian': 'vegetarian.html',
-                'non vegetarian': 'non_vegetarian.html',
-                'dairy': 'dairy_products.html',
-                'spices': 'spices_masalas.html',
-                'oils': 'oils_fats.html',
-                'snacks': 'snacks_dry_items.html',
-                'sweeteners': 'sweeteners_baking.html',
-                'fruits': 'fruits.html',
-                'beverages': 'beverages.html',
-                'household': 'household_essentials.html',
-                'order': 'write_order.html',
-                'organic benefits': 'blog/organic-benefits.html',
-                'seasonal guide': 'blog/seasonal-guide.html',
-                'recipes': 'blog/healthy-recipes.html',
-                'privacy': 'privacy-policy.html',
-                'terms': 'terms-of-service.html',
-                'shipping': 'shipping-info.html',
-                'returns': 'returns.html',
-                'careers': 'careers.html'
-            };
-
-            for (const [key, url] of Object.entries(pageMap)) {
-                if (searchInput.includes(key)) {
-                    window.location.href = url;
-                    return;
-                }
-            }
-            alert('Page not found. Please try another search term.');
-        }
-
-        // Allow pressing Enter to trigger search
-        document.getElementById('searchInput').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                handleSearch();
-            }
-        });
     </script>
 </body>
 </html>
