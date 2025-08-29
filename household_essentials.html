@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Household Essentials - Vegras</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 2.25rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            display: inline-flex;
+            align-items: center;
+            position: relative;
+            padding: 4px 8px;
+            background: linear-gradient(45deg, #d1fae5 50%, #ffedd5 50%);
+            border-radius: 4px;
+            transform: rotate(-2deg);
+        }
+        .logo-green {
+            color: #10b981;
+        }
+        .logo-saffron {
+            color: #f97316;
+        }
+        .logo::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-right: 8px solid #d1fae5;
+        }
+        .logo::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-left: 8px solid #ffedd5;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+        p {
+            font-weight: 300;
+        }
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .back-button:hover {
+            background-color: #e55e0d;
+        }
+        .quantity-input {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+        .quantity-btn {
+            background-color: #f97316;
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .quantity-btn:hover {
+            background-color: #e55e0d;
+        }
+        .quantity-value {
+            width: 3rem;
+            text-align: center;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            padding: 0.25rem;
+        }
+        .add-to-cart {
+            background-color: #10b981;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        .add-to-cart:hover {
+            background-color: #059669;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-white shadow-md fixed w-full z-10" style="top: 0;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <h1 class="logo">
+                        <span class="logo-green">Veg</span><span class="logo-saffron">ras</span>
+                    </h1>
+                </div>
+                <div>
+                    <a href="index.html" class="inline-block bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition-colors back-button">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Household Essentials Section -->
+    <section class="py-20 pt-24 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-gray-900 text-center mb-12">Household Essentials</h2>
+            <p class="text-lg text-gray-600 text-center mb-12">Stock up on cleaning supplies, paper products, and everyday home needs for a well-equipped household.</p>
+            
+            <!-- Cleaning Supplies -->
+            <h3 class="text-2xl font-semibold text-gray-900 mb-6">Cleaning Supplies</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-12">
+                <div class="bg-white p-6 rounded-lg shadow-md product-card">
+                    <img src="https://th.bing.com/th/id/OIP.zfNhWBRx0lC0L1zJ2H0aPQHaHa?rs=1&pid=ImgDetMain" alt="All-purpose Cleaner" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h4 class="text-xl font-semibold text-gray-900 mb-2">All-purpose Cleaner</h4>
+                    <p class="text-gray-600 mb-2">Versatile cleaner for all surfaces.</p>
+                    <p class="text-orange-500 font-semibold mb-2">₹150 / 1L</p>
+                    <div class="quantity-input">
+                        <span class="quantity-btn" onclick="changeQuantity(this, -1)">-</span>
+                        <input type="text" class="quantity-value" value="1" readonly>
+                        <span class="quantity-btn" onclick="changeQuantity(this, 1)">+</span>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md product-card">
+                    <img src="https://th.bing.com/th/id/OIP.yfNhWBRx0lC0L1zJ2H0aPQHaHa?rs=1&pid=ImgDetMain" alt="Disinfectant Spray" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h4 class="text-xl font-semibold text-gray-900 mb-2">Disinfectant Spray</h4>
+                    <p class="text-gray-600 mb-2">Kills 99.9% germs on surfaces.</p>
+                    <p class="text-orange-500 font-semibold mb-2">₹200 / 500ml</p>
+                    <div class="quantity-input">
+                        <span class="quantity-btn" onclick="changeQuantity(this, -1)">-</span>
+                        <input type="text" class="quantity-value" value="1" readonly>
+                        <span class="quantity-btn" onclick="changeQuantity(this, 1)">+</span>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md product-card">
+                    <img src="https://th.bing.com/th/id/OIP.xfNhWBRx0lC0L1zJ2H0aPQHaHa?rs=1&pid=ImgDetMain" alt="Glass Cleaner" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h4 class="text-xl font-semibold text-gray-900 mb-2">Glass Cleaner</h4>
+                    <p class="text-gray-600 mb-2">Streak-free shine for windows and mirrors.</p>
+                    <p class="text-orange-500 font-semibold mb-2">₹120 / 500ml</p>
+                    <div class="quantity-input">
+                        <span class="quantity-btn" onclick="changeQuantity(this, -1)">-</span>
+                        <input type="text" class="quantity-value" value="1" readonly>
+                        <span class="quantity-btn" onclick="changeQuantity(this, 1)">+</span>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md product-card">
+                    <img src="https://th.bing.com/th/id/OIP.wfNhWBRx0lC0L1zJ2H0aPQHaHa?rs=1&pid=ImgDetMain" alt="Toilet Bowl Cleaner" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h4 class="text-xl font-semibold text-gray-900 mb-2">Toilet Bowl Cleaner</h4>
+                    <p class="text-gray-600 mb-2">Powerful gel for a sparkling clean toilet.</p>
+                    <p class="text-orange-500 font-semibold mb-2">₹100 / 500ml</p>
+                    <div class="quantity-input">
+                        <span class="quantity-btn" onclick="changeQuantity(this, -1)">-</span>
+                        <input type="text" class="quantity-value" value="1" readonly>
+                        <span class="quantity-btn" onclick="changeQuantity(this, 1)">+</span>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md product-card">
+                    <img src="https://th.bing.com/th/id/OIP.vfNhWBRx0lC0L1zJ2H0aPQHaHa?rs=1&pid=ImgDetMain" alt="Toilet Brush & Plunger" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h4 class="text-xl font-semibold text-gray-900 mb-2">Toilet Brush & Plunger</h4>
+                    <p class="text-gray-600 mb-2">Durable set for bathroom maintenance.</p>
+                    <p class="text-orange-500 font-semibold mb-2">₹250 / Set</p>
+                    <div class="quantity-input">
+                        <span class="quantity-btn" onclick="changeQuantity(this, -1)">-</span>
+                        <input type="text" class="quantity-value" value="1" readonly>
+                        <span class="quantity-btn" onclick="changeQuantity(this, 1)">+</span>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md product-card">
+                    <img src="https://th.bing.com/th/id/OIP.ufNhWBRx0lC0L1zJ2H0aPQHaHa?rs=1&pid=ImgDetMain" alt="Floor Cleaner" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h4 class="text-xl font-semibold text-gray-900 mb-2">Floor Cleaner (Phenyl)</h4>
+                    <p class="text-gray-600 mb-2">Concentrated cleaner for sparkling floors.</p>
+                    <p class="text-orange-500 font-semibold mb-2">₹180 / 1L</p>
+                    <div class="quantity-input">
+                        <span class="quantity-btn" onclick="changeQuantity(this, -1)">-</span>
+                        <input type="text" class="quantity-value" value="1" readonly>
+                        <span class="quantity-btn" onclick="changeQuantity(this, 1)">+</span>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md product-card">
+                    <img src="https://th.bing.com/th/id/OIP.tfNhWBRx0lC0L1zJ2H0aPQHaHa?rs=1&pid=ImgDetMain" alt="Mop & Bucket" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h4 class="text-xl font-semibold text-gray-900 mb-2">Mop & Bucket</h4>
+                    <p class="text-gray-600 mb-2">Easy-to-use set for floor cleaning.</p>
+                    <p class="text-orange-500 font-semibold mb-2">₹350 / Set</p>
+                    <div class="quantity-input">
+                        <span class="quantity-btn" onclick="changeQuantity(this, -1)">-</span>
+                        <input type="text" class="quantity-value" value="1" readonly>
+                        <span class="quantity-btn" onclick="changeQuantity(this, 1)">+</span>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md product-card">
+                    <img src="https://th.bing.com/th/id/OIP.sfNhWBRx0lC0L1zJ2H0aPQHaHa?rs=1&pid=ImgDetMain" alt="Scrub Brushes & Sponges" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h4 class="text-xl font-semibold text-gray-900 mb-2">Scrub Brushes & Sponges</h4>
+                    <p class="text-gray-600 mb-2">Multi-purpose cleaning tools.</p>
+                    <p class="text-orange-500 font-semibold mb-2">₹80 / Pack</p>
+                    <div class="quantity-input">
+                        <span class="quantity-btn" onclick="changeQuantity(this, -1)">-</span>
+                        <input type="text" class="quantity-value" value="1" readonly>
+                        <span class="quantity-btn" onclick="changeQuantity(this, 1)">+</span>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md product-card">
+                    <img src="https://th.bing.com/th/id/OIP.rfNhWBRx0lC0L1zJ2H0aPQHaHa?rs=1&pid=ImgDetMain" alt="Microfiber Cloths" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h4 class="text-xl font-semibold text-gray-900 mb-2">Microfiber Cloths</h4>
+                    <p class="text-gray-600 mb-2">Reusable cloths for dust-free cleaning.</p>
+                    <p class="text-orange-500 font-semibold mb-2">₹150 / 3-Pack</p>
