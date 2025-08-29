@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://vegras.in/sitemap.xml
