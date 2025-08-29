@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vegras - Job Application Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9fafb;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .form-section {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+        label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #f97316;
+            box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.2);
+        }
+        .submit-button {
+            background-color: #f97316;
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .submit-button:hover {
+            background-color: #e55e0d;
+        }
+        .back-to-home {
+            display: inline-block;
+            background-color: #f97316;
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 1rem;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+        .back-to-home:hover {
+            background-color: #e55e0d;
+        }
+        .error {
+            color: #dc2626;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .container {
+                padding: 1.5rem 1rem;
+            }
+            input, select, textarea {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            const form = document.getElementById('jobApplicationForm');
+            const name = form.querySelector('#name').value;
+            const address = form.querySelector('#address').value;
+            const role = form.querySelector('#role').value;
+            const education = form.querySelector('#education').value;
+            const email = form.querySelector('#email').value;
+            const phone = form.querySelector('#phone').value;
+            const comments = form.querySelector('#comments').value;
+
+            // Basic validation
+            if (!name || !address || !role || !education || !email || !phone) {
+                document.getElementById('error').style.display = 'block';
+                return;
+            }
+
+            // Construct email body
+            const subject = encodeURIComponent(`Job Application: ${role}`);
+            const body = encodeURIComponent(
+                `Name: ${name}\n` +
+                `Address: ${address}\n` +
+                `Role Applied For: ${role}\n` +
+                `Educational Qualifications: ${education}\n` +
+                `Email: ${email}\n` +
+                `Phone: ${phone}\n` +
+                `Additional Comments: ${comments || 'None'}\n\n` +
+                `Note: Please attach your resume to this email before sending.`
+            );
+
+            // Open mailto link
+            window.location.href = `mailto:careers.vegras@gmail.com?subject=${subject}&body=${body}`;
+            form.reset();
+            document.getElementById('error').style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Job Application Form</h1>
+        <div class="form-section">
+            <p>Thank you for your interest in joining Vegras! Please fill out the form below to apply for a position with us. All fields marked with an asterisk (*) are required. Your application will be sent to our HR team at <a href="mailto:careers.vegras@gmail.com">careers.vegras@gmail.com</a>. Ensure you attach your resume when prompted to send the email.</p>
+            <form id="jobApplicationForm" onsubmit="handleSubmit(event)">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="address">Address *</label>
+                <textarea id="address" name="address" rows="4" required></textarea>
+
+                <label for="role">Role to Apply For *</label>
+                <select id="role" name="role" required>
+                    <option value="" disabled selected>Select a role</option>
+                    <option value="Supply Chain & Logistics">Supply Chain & Logistics</option>
+                    <option value="Customer Support">Customer Support</option>
+                    <option value="Sales & Business Development">Sales & Business Development</option>
+                    <option value="Warehouse Operations">Warehouse Operations</option>
+                    <option value="Marketing & Digital">Marketing & Digital</option>
+                </select>
+
+                <label for="education">Educational Qualifications *</label>
+                <textarea id="education" name="education" rows="4" placeholder="e.g., Degree, Institution, Year" required></textarea>
+
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <label for="comments">Additional Comments</label>
+                <textarea id="comments" name="comments" rows="4" placeholder="Anything else you’d like us to know?"></textarea>
+
+                <p><strong>Resume Upload</strong>: After submitting this form, your default email client will open. Please attach your resume (PDF or Word format) to the email before sending.</p>
+
+                <p id="error" class="error">Please fill out all required fields.</p>
+                <button type="submit" class="submit-button">Submit Application</button>
+            </form>
+        </div>
+        <div class="text-center">
+            <a href="careers.html" class="back-to-home">Back to Careers</a>
+        </div>
+    </div>
+</body>
+</html>
